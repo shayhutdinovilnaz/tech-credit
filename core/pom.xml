@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>all</artifactId>
-        <groupId>com.tech-credit</groupId>
+        <groupId>com.technical.credit</groupId>
         <version>0.0.1</version>
     </parent>
 
@@ -23,7 +23,7 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-        
+
     </dependencies>
 
 </project>

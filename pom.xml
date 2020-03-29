@@ -12,7 +12,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>com.tech-credit</groupId>
+    <groupId>com.technical.credit</groupId>
     <artifactId>all</artifactId>
     <version>0.0.1</version>
     <name>all</name>
