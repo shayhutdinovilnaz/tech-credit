@@ -19,7 +19,7 @@ public class LocalizedStringValueModel extends ItemModel {
     private LanguageModel language;
     @Column(nullable = false)
     private String value;
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "localized_value_id")
     private LocalizedStringModel localizedString;
 }

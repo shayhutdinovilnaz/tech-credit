@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import java.util.List;
 
@@ -18,6 +19,6 @@ import java.util.List;
 public class LocalizedStringModel extends ItemModel {
     @Column(name = "default_value")
     private String defaultValue;
-    @OneToMany(mappedBy = "localizedString")
+    @OneToMany(mappedBy = "localizedString", fetch = FetchType.EAGER)
     private List<LocalizedStringValueModel> localizedValues;
 }

@@ -4,7 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * @author ilnaz-92@yandex.ru
@@ -21,4 +24,14 @@ public abstract class ItemModel {
     private Date createdTime;
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date modifiedTime;
+
+    protected String getLocalizedValue(final LanguageModel language, final LocalizedStringModel localizedString) {
+        return Optional.ofNullable(localizedString.getLocalizedValues())
+                .map(Collection::stream)
+                .orElseGet(Stream::empty)
+                .filter(value -> value.getLanguage().equals(language))
+                .findAny()
+                .map(LocalizedStringValueModel::getValue)
+                .orElseGet(localizedString::getDefaultValue);
+    }
 }
