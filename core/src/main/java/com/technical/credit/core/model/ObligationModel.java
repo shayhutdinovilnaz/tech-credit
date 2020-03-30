@@ -3,10 +3,8 @@ package com.technical.credit.core.model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.Date;
 
 /**
  * @author ilnaz-92@yandex.ru
@@ -16,6 +14,10 @@ import javax.persistence.ManyToOne;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class ObligationModel extends ItemModel {
+    @Column(nullable = false)
+    private String name;
+    @Column(nullable = false)
+    private String description;
     @ManyToOne(optional = false)
     @JoinColumn(name = "skill_id")
     private SkillModel skillModel;
@@ -24,4 +26,6 @@ public class ObligationModel extends ItemModel {
     private StatusModel statusModel;
     @Column(nullable = false, name = "user_id")
     private String userId;
+    @Temporal(value = TemporalType.TIMESTAMP)
+    private Date expiredDate;
 }
