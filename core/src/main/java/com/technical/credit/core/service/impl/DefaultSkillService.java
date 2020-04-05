@@ -1,13 +1,14 @@
 package com.technical.credit.core.service.impl;
 
+import com.technical.credit.core.exception.ModelNotFoundException;
 import com.technical.credit.core.model.SkillModel;
 import com.technical.credit.core.repository.SkillRepository;
 import com.technical.credit.core.service.SkillService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import javax.transaction.Transactional;
-import java.util.Date;
 
 
 /**
@@ -21,23 +22,21 @@ public class DefaultSkillService implements SkillService {
 
     @Override
     @Transactional
-    public void save(SkillModel skill) {
-        if (skill.getCreatedTime() == null) {
-            skill.setCreatedTime(new Date());
-        }
+    public void save(final SkillModel skill) {
+        Assert.notNull(skill, "Saving object can't be nullable.");
 
-        skill.setModifiedTime(new Date());
+        updateSaveTime(skill);
         skillRepository.save(skill);
     }
 
     @Override
-    public SkillModel getById(Long id) {
-        return skillRepository.findById(id).orElse(null);
+    public SkillModel getById(final long id) {
+        return skillRepository.findById(id).orElseThrow(() -> new ModelNotFoundException("Model isn't found. Required model id = " + id));
     }
 
     @Override
     @Transactional
-    public void delete(SkillModel skill) {
+    public void delete(final SkillModel skill) {
         skillRepository.delete(skill);
     }
 }
