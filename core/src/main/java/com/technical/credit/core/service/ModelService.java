@@ -16,7 +16,6 @@ public interface ModelService<T extends ItemModel> {
      * entity instance completely.
      *
      * @param item must not be {@literal null}.
-     * @return the saved entity; will never be {@literal null}.
      * @throws IllegalArgumentException in case the given {@literal entity} is {@literal null}.
      */
     void save(T item);

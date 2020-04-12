@@ -2,6 +2,7 @@ package com.technical.credit.core.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -22,6 +23,6 @@ public class StatusModel extends ItemModel {
     private LocalizedStringModel name;
 
     public String getName(final LanguageModel language) {
-        return Optional.ofNullable(getLocalizedValue(language, name)).orElse("");
+        return Optional.ofNullable(getLocalizedValue(language, name)).orElse(StringUtils.EMPTY);
     }
 }
