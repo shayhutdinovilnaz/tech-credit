@@ -20,10 +20,10 @@ public class ObligationModel extends ItemModel {
     private String description;
     @ManyToOne(optional = false)
     @JoinColumn(name = "skill_id")
-    private SkillModel skillModel;
+    private SkillModel skill;
     @ManyToOne(optional = false)
     @JoinColumn(name = "status_id")
-    private StatusModel statusModel;
+    private StatusModel status;
     @Column(nullable = false, name = "user_id")
     private String userId;
     @Temporal(value = TemporalType.TIMESTAMP)
