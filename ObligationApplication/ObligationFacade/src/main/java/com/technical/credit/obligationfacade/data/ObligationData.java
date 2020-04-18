@@ -12,5 +12,5 @@ public class ObligationData {
     private SkillData skill;
     private StatusData status;
     private Date expiredDate;
-    private UserData userData;
+    private UserData user;
 }

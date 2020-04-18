@@ -6,10 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * @author ilnaz-92@yandex.ru
- * Created on 29.03.2020
- */
+
 @MappedSuperclass
 @Getter
 @Setter

@@ -8,10 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-/**
- * @author ilnaz-92@yandex.ru
- * Created on 29.03.2020
- */
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = true)

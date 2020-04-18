@@ -24,8 +24,9 @@ public class ObligationModel extends ItemModel {
     @ManyToOne(optional = false)
     @JoinColumn(name = "status_id")
     private StatusModel status;
-    @Column(nullable = false, name = "user_id")
-    private String userId;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "user_id")
+    private UserModel user;
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date expiredDate;
 }
