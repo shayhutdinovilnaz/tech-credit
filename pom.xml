@@ -12,6 +12,7 @@
     <modules>
         <module>ConfigurationApplication</module>
         <module>ObligationApplication</module>
+        <module>AuthorizationApplication</module>
     </modules>
 
 </project>
