@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "spring.datasource.jpa.hibernate.naming.physical-strategy",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.jpa.hibernate.naming.physical-strategy."
+    },
+    {
+      "name": "spring.datasource.jpa.hibernate.default_schema",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.jpa.hibernate.default_schema."
+    }
+  ] }
