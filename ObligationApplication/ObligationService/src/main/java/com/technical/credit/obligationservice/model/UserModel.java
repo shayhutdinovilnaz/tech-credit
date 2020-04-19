@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -20,5 +21,5 @@ public class UserModel extends ItemModel {
     @Column(nullable = false)
     private String lastName;
     @OneToMany(mappedBy = "user", orphanRemoval = true)
-    private Set<ObligationModel> obligations;
+    private Set<ObligationModel> obligations = new HashSet<>();
 }

@@ -2,98 +2,98 @@ package com.technical.credit.obligationservice.service.impl;
 
 
 import com.technical.credit.obligationservice.exception.ModelNotFoundException;
-import com.technical.credit.obligationservice.model.SkillModel;
-import com.technical.credit.obligationservice.repository.SkillRepository;
+import com.technical.credit.obligationservice.model.ItemModel;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Date;
 import java.util.Optional;
 
 import static org.mockito.Matchers.anyObject;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
 
 
 @RunWith(MockitoJUnitRunner.class)
-public class AbstractModelServiceTest {
-
-    @InjectMocks
-    private DefaultSkillService underTest;
-
-    @Mock
-    private SkillRepository skillRepository;
+public abstract class AbstractModelServiceTest<T extends ItemModel> {
 
     @Test
     public void testSaveNewItem() {
-        final SkillModel skillModel = mock(SkillModel.class);
+        final T item = mock(getGenericClassOfService());
 
-        underTest.save(skillModel);
-        verify(skillModel).getCreatedTime();
-        verify(skillModel).setCreatedTime(anyObject());
-        verify(skillModel).setModifiedTime(anyObject());
-        verifyNoMoreInteractions(skillModel);
-        verify(skillRepository).save(skillModel);
-        verifyNoMoreInteractions(skillRepository);
+        getGenericModelService().save(item);
+        verify(item).getCreatedTime();
+        verify(item).setCreatedTime(anyObject());
+        verify(item).setModifiedTime(anyObject());
+        verifyNoMoreInteractions(item);
+        verify(getModelRepository()).save(item);
+        verifyNoMoreInteractions(getModelRepository());
     }
 
     @Test
     public void testSaveExistItem() {
-        final SkillModel skillModel = mock(SkillModel.class);
+        final T item = mock(getGenericClassOfService());
 
-        when(skillModel.getCreatedTime()).thenReturn(new Date());
+        when(item.getCreatedTime()).thenReturn(new Date());
 
-        underTest.save(skillModel);
-        verify(skillModel).getCreatedTime();
-        verify(skillModel).setModifiedTime(anyObject());
-        verifyNoMoreInteractions(skillModel);
-        verify(skillRepository).save(skillModel);
-        verifyNoMoreInteractions(skillRepository);
+        getGenericModelService().save(item);
+        verify(item).getCreatedTime();
+        verify(item).setModifiedTime(anyObject());
+        verifyNoMoreInteractions(item);
+        verify(getModelRepository()).save(item);
+        verifyNoMoreInteractions(getModelRepository());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testSaveIllegalItem() {
-        underTest.save(null);
+        getGenericModelService().save(null);
     }
 
     @Test(expected = ModelNotFoundException.class)
     public void testGetByIdNotExistItem() {
-        final Long itemId = 1L;
+        final long itemId = 1L;
 
-        when(skillRepository.findById(itemId)).thenReturn(Optional.empty());
+        when(getModelRepository().findById(itemId)).thenReturn(Optional.empty());
 
-        underTest.getById(itemId);
+        getGenericModelService().getById(itemId);
     }
 
     @Test
     public void testGetByIdExistItem() {
         final Long itemId = 1L;
-        final SkillModel skillModel = mock(SkillModel.class);
+        final T item = mock(getGenericClassOfService());
 
-        when(skillRepository.findById(itemId)).thenReturn(Optional.of(skillModel));
+        when(getModelRepository().findById(itemId)).thenReturn(Optional.of(item));
 
-        Assert.assertEquals(skillModel, underTest.getById(itemId));
-        verify(skillRepository).findById(itemId);
-        verifyNoMoreInteractions(skillRepository);
+        Assert.assertEquals(item, getGenericModelService().getById(itemId));
+        verify(getModelRepository()).findById(itemId);
+        verifyNoMoreInteractions(getModelRepository());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testDeleteNullableItem() {
-
-        doThrow(new IllegalArgumentException()).when(skillRepository).delete(null);
-
-        underTest.delete(null);
+        doThrow(new IllegalArgumentException()).when(getModelRepository()).delete(null);
+        getGenericModelService().delete(null);
     }
 
     @Test
     public void testDelete() {
-        final SkillModel skillModel = mock(SkillModel.class);
+        final T item = mock(getGenericClassOfService());
 
-        underTest.delete(skillModel);
-        verify(skillRepository).delete(skillModel);
-        verifyNoMoreInteractions(skillRepository);
+        getGenericModelService().delete(item);
+        verify(getModelRepository()).delete(item);
+        verifyNoMoreInteractions(getModelRepository());
     }
+
+    protected abstract Class<T> getGenericClassOfService();
+
+    protected abstract AbstractModelService<T> getGenericModelService();
+
+    protected abstract JpaRepository<T, Long> getModelRepository();
 }
