@@ -12,7 +12,7 @@ import java.util.Map;
 public abstract class AbstractController {
 
     @ExceptionHandler(ModelNotFoundException.class)
-    public default ResponseEntity<Map<String, Object>> handleIllegalArgumentException(final ModelNotFoundException exception, final HttpServletRequest request) {
+    public ResponseEntity<Map<String, Object>> handleIllegalArgumentException(final ModelNotFoundException exception, final HttpServletRequest request) {
         final Map<String, Object> responseBody = RequestExceptionHandlerFormatter.format(exception, request, HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(responseBody, HttpStatus.BAD_REQUEST);
     }
