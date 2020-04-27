@@ -58,6 +58,7 @@ public class ObligationConverterTest {
         final UserData userTarget = mock(UserData.class);
         final Date expiredDate = mock(Date.class);
         final Long obligationId = 1L;
+        final Long userId = 1L;
         final String obligationName = "Obligation name";
         final String obligationDescription = "Obligation description";
 
@@ -67,7 +68,8 @@ public class ObligationConverterTest {
         when(source.getExpiredDate()).thenReturn(expiredDate);
         when(source.getSkill()).thenReturn(skillSource);
         when(source.getStatus()).thenReturn(statusSource);
-        when(source.getUser()).thenReturn(userSource);
+        when(source.getUserId()).thenReturn(userId);
+        when(userService.getById(userId)).thenReturn(userSource);
         when(genericInstanceFactory.getInstance(ObligationData.class)).thenReturn(target);
         when(skillConverter.convert(skillSource)).thenReturn(skillTarget);
         when(statusConverter.convert(statusSource)).thenReturn(statusTarget);
@@ -79,7 +81,7 @@ public class ObligationConverterTest {
         verify(source).getName();
         verify(source).getDescription();
         verify(source).getExpiredDate();
-        verify(source).getUser();
+        verify(source).getUserId();
         verify(source).getSkill();
         verify(source).getStatus();
         verifyNoMoreInteractions(source);
@@ -99,8 +101,8 @@ public class ObligationConverterTest {
         verifyNoMoreInteractions(statusConverter);
         verify(userConverter).convert(userSource);
         verifyNoMoreInteractions(userConverter);
-
-        verifyZeroInteractions(userService);
+        verify(userService).getById(userId);
+        verifyNoMoreInteractions(userService);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -125,7 +127,7 @@ public class ObligationConverterTest {
         when(source.getExpiredDate()).thenReturn(expiredDate);
         when(source.getSkill()).thenReturn(null);
         when(source.getStatus()).thenReturn(null);
-        when(source.getUser()).thenReturn(null);
+        when(source.getUserId()).thenReturn(null);
         when(genericInstanceFactory.getInstance(ObligationData.class)).thenReturn(target);
 
         final ObligationData obligation = underTest.convert(source);
@@ -134,7 +136,7 @@ public class ObligationConverterTest {
         verify(source).getName();
         verify(source).getDescription();
         verify(source).getExpiredDate();
-        verify(source).getUser();
+        verify(source).getUserId();
         verify(source).getSkill();
         verify(source).getStatus();
         verifyNoMoreInteractions(source);
@@ -163,8 +165,8 @@ public class ObligationConverterTest {
         final UserModel userSource = mock(UserModel.class);
 
         when(genericInstanceFactory.getInstance(ObligationData.class)).thenReturn(target);
-        when(source.getUser()).thenReturn(userSource);
-        when(userConverter.convert(userSource)).thenThrow(ModelNotFoundException.class);
+        when(source.getUserId()).thenReturn(1L);
+        when(userService.getById(1L)).thenThrow(ModelNotFoundException.class);
         underTest.convert(source);
     }
 
@@ -197,6 +199,7 @@ public class ObligationConverterTest {
         when(skillConverter.reverseConvert(skillSource)).thenReturn(skillTarget);
         when(statusConverter.reverseConvert(statusSource)).thenReturn(statusTarget);
         when(userService.getById(userId)).thenReturn(userTarget);
+        when(userTarget.getId()).thenReturn(userId);
 
         final ObligationModel obligation = underTest.reverseConvert(source);
         Assert.assertNotNull(obligation);
@@ -218,7 +221,7 @@ public class ObligationConverterTest {
         verify(target).setExpiredDate(expiredDate);
         verify(target).setSkill(skillTarget);
         verify(target).setStatus(statusTarget);
-        verify(target).setUser(userTarget);
+        verify(target).setUserId(userId);
         verifyNoMoreInteractions(target);
         verify(skillConverter).reverseConvert(skillSource);
         verifyNoMoreInteractions(skillConverter);
@@ -272,7 +275,7 @@ public class ObligationConverterTest {
         verify(target).setExpiredDate(expiredDate);
         verify(target).setSkill(null);
         verify(target).setStatus(null);
-        verify(target).setUser(null);
+        verify(target).setUserId(null);
         verifyNoMoreInteractions(target);
         verifyZeroInteractions(skillConverter);
         verifyZeroInteractions(statusConverter);

@@ -117,6 +117,7 @@
                 <version>${springfox.swagger.version}</version>
                 <scope>compile</scope>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
 

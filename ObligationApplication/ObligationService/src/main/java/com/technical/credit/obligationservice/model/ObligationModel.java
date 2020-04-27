@@ -18,15 +18,14 @@ public class ObligationModel extends ItemModel {
     private String name;
     @Column(nullable = false)
     private String description;
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinColumn(name = "skill_id")
     private SkillModel skill;
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinColumn(name = "status_id")
     private StatusModel status;
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "user_id")
-    private UserModel user;
+    @Column(nullable = false)
+    private Long userId;
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date expiredDate;
 }
