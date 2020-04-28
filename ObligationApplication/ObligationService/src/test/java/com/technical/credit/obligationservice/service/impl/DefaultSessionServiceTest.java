@@ -1,34 +1,24 @@
 package com.technical.credit.obligationservice.service.impl;
 
 
+import com.technical.credit.obligationservice.model.LanguageModel;
+import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.runners.MockitoJUnitRunner;
 
 
-@RunWith(MockitoJUnitRunner.class)
 public class DefaultSessionServiceTest {
 
-    @InjectMocks
-    private DefaultSessionService underTest;
-
+    private final DefaultSessionService underTest = new DefaultSessionService();
 
     @Test
-    public void testDefaultSessionServiceTest() {
-
+    public void testCurrentLanguage() {
+        final LanguageModel language = new LanguageModel();
+        underTest.setCurrentLanguage(language);
+        Assert.assertEquals(language, underTest.getCurrentLanguage());
     }
 
     @Test
-    public void getCurrentLanguage() {
-
-        // expected
-
-        // given
-
-        // when
-
-        // then
-
+    public void testCurrentUser() {
+        //TODO
     }
 }

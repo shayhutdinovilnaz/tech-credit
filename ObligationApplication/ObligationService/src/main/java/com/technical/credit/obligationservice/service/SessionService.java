@@ -12,6 +12,14 @@ public interface SessionService {
      */
     LanguageModel getCurrentLanguage();
 
+
+    /**
+     * The session language is set up.
+     *
+     * @param language - the session language
+     */
+    void setCurrentLanguage(LanguageModel language);
+
     /**
      * The retrieving the current user of the session.
      *

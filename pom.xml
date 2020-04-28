@@ -12,7 +12,7 @@
     <modules>
         <module>ConfigurationApplication</module>
         <module>ObligationApplication</module>
-        <module>AuthorizationApplication</module>
+        <module>AccountApplication</module>
     </modules>
 
 </project>

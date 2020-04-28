@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -30,6 +31,7 @@ public class ObligationControllerTest extends AbstractControllerTest {
     ObligationFacade obligationFacade;
 
     @Test
+    @WithMockUser(authorities = "create_profile")
     public void testSave() throws Exception {
         final ObligationData requestObligationData = new ObligationData();
         final ObligationData responseObligationData = new ObligationData();
@@ -47,6 +49,7 @@ public class ObligationControllerTest extends AbstractControllerTest {
     }
 
     @Test
+    @WithMockUser(authorities = "create_profile")
     public void testSaveWithNotExistAttribute() throws Exception {
         final ObligationData requestObligationData = new ObligationData();
         final String jsonBody = parseToJson(requestObligationData);
@@ -63,6 +66,7 @@ public class ObligationControllerTest extends AbstractControllerTest {
     }
 
     @Test
+    @WithMockUser(authorities = "read_profile")
     public void testSearchById() throws Exception {
         final String url = "/api/v1/obligations/1";
         final ObligationData obligation = new ObligationData();
@@ -75,6 +79,7 @@ public class ObligationControllerTest extends AbstractControllerTest {
     }
 
     @Test
+    @WithMockUser(authorities = "read_profile")
     public void testSearchByIdNotFound() throws Exception {
         final String url = "/api/v1/obligations/1";
 
@@ -86,6 +91,7 @@ public class ObligationControllerTest extends AbstractControllerTest {
     }
 
     @Test
+    @WithMockUser(authorities = "delete_profile")
     public void testSuccessfulDeleteBookById() throws Exception {
         final String url = "/api/v1/obligations/1";
 
@@ -95,6 +101,7 @@ public class ObligationControllerTest extends AbstractControllerTest {
     }
 
     @Test
+    @WithMockUser(authorities = "delete_profile")
     public void testAttemptToDeleteNotExistBook() throws Exception {
         final String url = "/api/v1/obligations/1";
 
@@ -106,6 +113,7 @@ public class ObligationControllerTest extends AbstractControllerTest {
     }
 
     @Test
+    @WithMockUser(authorities = "read_profile")
     public void testSearchByQuery() throws Exception {
         final String url = "/api/v1/obligations/search";
         final String query = "Free text";
