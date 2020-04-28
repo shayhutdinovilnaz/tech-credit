@@ -7,18 +7,16 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-/**
- * @author ilnaz-92@yandex.ru
- * Created on 29.03.2020
- */
+
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class LocalizedStringModel extends ItemModel {
     @Column(name = "default_value")
     private String defaultValue;
-    @OneToMany(mappedBy = "localizedString", fetch = FetchType.EAGER)
-    private List<LocalizedStringValueModel> localizedValues;
+    @OneToMany(mappedBy = "localizedString", fetch = FetchType.EAGER, orphanRemoval = true)
+    private Set<LocalizedStringValueModel> localizedValues = new HashSet<>();
 }

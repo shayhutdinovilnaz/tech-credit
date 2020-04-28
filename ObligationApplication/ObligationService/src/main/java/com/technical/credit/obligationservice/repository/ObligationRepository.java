@@ -1,11 +1,12 @@
 package com.technical.credit.obligationservice.repository;
 
 import com.technical.credit.obligationservice.model.ObligationModel;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-/**
- * @author ilnaz-92@yandex.ru
- * Created on 30.03.2020
- */
+import java.util.List;
+
 public interface ObligationRepository extends JpaRepository<ObligationModel, Long> {
+
+    List<ObligationModel> findObligationModelByNameContainingIgnoreCaseAndUserId(final String name, final Pageable pageable, final long userId);
 }

@@ -7,10 +7,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
-/**
- * @author ilnaz-92@yandex.ru
- * Created on 30.03.2020
- */
+
 public interface ModelService<T extends ItemModel> {
     /**
      * Saves a given entity. Use the returned instance for further operations as the save operation might have changed the

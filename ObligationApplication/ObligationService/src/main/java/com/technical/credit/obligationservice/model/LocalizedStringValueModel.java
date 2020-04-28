@@ -5,10 +5,7 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 
-/**
- * @author ilnaz-92@yandex.ru
- * Created on 29.03.2020
- */
+
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"language_id", "localized_value_id"})})
 @Data
