@@ -13,4 +13,8 @@ public class ModelNotFoundException extends BusinessException {
     public ModelNotFoundException(String message) {
         super(message);
     }
+
+    public ModelNotFoundException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }

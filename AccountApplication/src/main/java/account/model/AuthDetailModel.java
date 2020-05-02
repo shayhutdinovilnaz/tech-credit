@@ -9,9 +9,9 @@ import java.util.Collection;
 import java.util.List;
 
 
-public class AuthUserDetailModel extends UserModel implements UserDetails {
+public class AuthDetailModel extends UserModel implements UserDetails {
 
-    public AuthUserDetailModel(UserModel user) {
+    public AuthDetailModel(UserModel user) {
         super(user);
     }
 

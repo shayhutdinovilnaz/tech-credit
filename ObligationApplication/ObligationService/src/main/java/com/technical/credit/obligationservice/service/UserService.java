@@ -10,4 +10,11 @@ public interface UserService {
      * @return the found user
      */
     UserModel getById(long id);
+
+    /**
+     *
+     * @param username
+     * @return
+     */
+    UserModel getByUsername(String username);
 }

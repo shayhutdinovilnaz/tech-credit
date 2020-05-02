@@ -5,7 +5,7 @@ import com.technical.credit.obligationfacade.data.SkillData;
 import com.technical.credit.obligationservice.factory.GenericInstanceFactory;
 import com.technical.credit.obligationservice.model.SkillModel;
 import com.technical.credit.obligationservice.service.LocalizationService;
-import com.technical.credit.obligationservice.service.SessionService;
+import com.technical.credit.obligationservice.service.RequestService;
 import com.technical.credit.obligationservice.service.SkillService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import org.springframework.util.Assert;
 @RequiredArgsConstructor
 public class SkillConverter implements Converter<SkillData, SkillModel> {
     private final GenericInstanceFactory genericInstanceFactory;
-    private final SessionService sessionService;
+    private final RequestService requestService;
     private final LocalizationService localizationService;
     private final SkillService skillService;
 
@@ -25,7 +25,7 @@ public class SkillConverter implements Converter<SkillData, SkillModel> {
 
         final SkillData target = genericInstanceFactory.getInstance(SkillData.class);
         target.setId(source.getId());
-        target.setName(localizationService.getLocalizedStringValue(sessionService.getCurrentLanguage(), source.getName()));
+        target.setName(localizationService.getLocalizedStringValue(requestService.getCurrentLanguage(), source.getName()));
         return target;
     }
 
@@ -36,7 +36,7 @@ public class SkillConverter implements Converter<SkillData, SkillModel> {
         final SkillModel target = genericInstanceFactory.getInstance(SkillModel.class);
         target.setId(source.getId());
         attachInternalLocalizedAttributes(target);
-        target.setName(localizationService.addLocalizedStringValue(sessionService.getCurrentLanguage(), source.getName(), target.getName()));
+        target.setName(localizationService.addLocalizedStringValue(requestService.getCurrentLanguage(), source.getName(), target.getName()));
         return target;
     }
 

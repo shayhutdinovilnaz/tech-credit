@@ -7,5 +7,5 @@ import java.util.Optional;
 
 
 public interface LanguageRepository extends JpaRepository<LanguageModel, Long> {
-    Optional<LanguageModel> findByActiveAndIsoCode(String isoCode, boolean active);
+    Optional<LanguageModel> findByIsoCodeAndActive(String isoCode, boolean active);
 }

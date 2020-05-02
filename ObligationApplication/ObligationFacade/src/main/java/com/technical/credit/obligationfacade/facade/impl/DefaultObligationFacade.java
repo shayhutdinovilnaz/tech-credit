@@ -7,8 +7,8 @@ import com.technical.credit.obligationfacade.facade.ObligationFacade;
 import com.technical.credit.obligationservice.factory.GenericInstanceFactory;
 import com.technical.credit.obligationservice.model.ObligationModel;
 import com.technical.credit.obligationservice.service.ObligationService;
+import com.technical.credit.obligationservice.service.RequestService;
 import com.technical.credit.obligationservice.service.SearchQuery;
-import com.technical.credit.obligationservice.service.SessionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 public class DefaultObligationFacade implements ObligationFacade {
     private final Converter<ObligationData, ObligationModel> obligationConverter;
     private final ObligationService obligationService;
-    private final SessionService sessionService;
+    private final RequestService requestService;
     private final GenericInstanceFactory genericInstanceFactory;
 
     @Override
@@ -31,7 +31,7 @@ public class DefaultObligationFacade implements ObligationFacade {
         Assert.notNull(obligationData, "Domain class must not be null!");
 
         final ObligationModel obligationModel = obligationConverter.reverseConvert(obligationData);
-        obligationModel.setUserId(sessionService.getCurrentUser().getId());
+        obligationModel.setUserId(requestService.getCurrentUser().getId());
         obligationService.save(obligationModel);
         return obligationConverter.convert(obligationModel);
     }
@@ -50,7 +50,7 @@ public class DefaultObligationFacade implements ObligationFacade {
         searchQuery.setPage(page);
         searchQuery.setLimit(limit);
 
-        return Optional.ofNullable(obligationService.search(searchQuery, sessionService.getCurrentUser()))
+        return Optional.ofNullable(obligationService.search(searchQuery, requestService.getCurrentUser()))
                 .orElseGet(Collections::emptyList)
                 .stream()
                 .map(obligationConverter::convert)

@@ -5,7 +5,7 @@ import com.technical.credit.obligationfacade.data.StatusData;
 import com.technical.credit.obligationservice.factory.GenericInstanceFactory;
 import com.technical.credit.obligationservice.model.StatusModel;
 import com.technical.credit.obligationservice.service.LocalizationService;
-import com.technical.credit.obligationservice.service.SessionService;
+import com.technical.credit.obligationservice.service.RequestService;
 import com.technical.credit.obligationservice.service.StatusService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import org.springframework.util.Assert;
 @RequiredArgsConstructor
 public class StatusConverter implements Converter<StatusData, StatusModel> {
     private final GenericInstanceFactory genericInstanceFactory;
-    private final SessionService sessionService;
+    private final RequestService requestService;
     private final LocalizationService localizationService;
     private final StatusService statusService;
 
@@ -25,7 +25,7 @@ public class StatusConverter implements Converter<StatusData, StatusModel> {
 
         final StatusData target = genericInstanceFactory.getInstance(StatusData.class);
         target.setId(source.getId());
-        target.setName(localizationService.getLocalizedStringValue(sessionService.getCurrentLanguage(), source.getName()));
+        target.setName(localizationService.getLocalizedStringValue(requestService.getCurrentLanguage(), source.getName()));
         return target;
     }
 
@@ -36,7 +36,7 @@ public class StatusConverter implements Converter<StatusData, StatusModel> {
         final StatusModel target = genericInstanceFactory.getInstance(StatusModel.class);
         target.setId(source.getId());
         attachInternalLocalizedAttributes(target);
-        target.setName(localizationService.addLocalizedStringValue(sessionService.getCurrentLanguage(), source.getName(), target.getName()));
+        target.setName(localizationService.addLocalizedStringValue(requestService.getCurrentLanguage(), source.getName(), target.getName()));
         return target;
     }
 

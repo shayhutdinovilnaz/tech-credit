@@ -4,11 +4,11 @@ package com.technical.credit.obligationservice.service;
 import com.technical.credit.obligationservice.model.LanguageModel;
 import com.technical.credit.obligationservice.model.UserModel;
 
-public interface SessionService {
+public interface RequestService {
     /**
-     * The retrieving the current language of the session.
+     * The retrieving the current language of the request.
      *
-     * @return the current session language.
+     * @return the current request language.
      */
     LanguageModel getCurrentLanguage();
 
@@ -16,14 +16,14 @@ public interface SessionService {
     /**
      * The session language is set up.
      *
-     * @param language - the session language
+     * @param language - the request language
      */
     void setCurrentLanguage(LanguageModel language);
 
     /**
-     * The retrieving the current user of the session.
+     * The retrieving the current user of the request.
      *
-     * @return the current session user.
+     * @return the current request user.
      */
     UserModel getCurrentUser();
 

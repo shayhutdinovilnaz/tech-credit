@@ -1,5 +1,7 @@
 package com.technical.credit.webapp.configuaration;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -9,7 +11,10 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @Configuration
 @EnableResourceServer
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableOAuth2Sso
+@RequiredArgsConstructor
 public class ObligationWebApplicationSecurityConfiguration extends WebSecurityConfigurerAdapter {
+
     @Override
     public void configure(WebSecurity web) {
         web.ignoring().antMatchers("/v2/api-docs",

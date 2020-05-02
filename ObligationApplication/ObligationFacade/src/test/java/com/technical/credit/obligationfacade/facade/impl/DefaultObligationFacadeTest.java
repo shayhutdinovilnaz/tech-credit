@@ -7,8 +7,8 @@ import com.technical.credit.obligationservice.factory.GenericInstanceFactory;
 import com.technical.credit.obligationservice.model.ObligationModel;
 import com.technical.credit.obligationservice.model.UserModel;
 import com.technical.credit.obligationservice.service.ObligationService;
+import com.technical.credit.obligationservice.service.RequestService;
 import com.technical.credit.obligationservice.service.SearchQuery;
-import com.technical.credit.obligationservice.service.SessionService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,7 +34,7 @@ public class DefaultObligationFacadeTest {
     ObligationService obligationService;
 
     @Mock
-    SessionService sessionService;
+    RequestService requestService;
 
     @Mock
     GenericInstanceFactory genericInstanceFactory;
@@ -49,18 +49,18 @@ public class DefaultObligationFacadeTest {
 
         when(obligationConverter.reverseConvert(incomeObligationData)).thenReturn(obligationModel);
         when(obligationConverter.convert(obligationModel)).thenReturn(outcomeObligationData);
-        when(sessionService.getCurrentUser()).thenReturn(currentUser);
+        when(requestService.getCurrentUser()).thenReturn(currentUser);
         when(currentUser.getId()).thenReturn(userId);
 
-        final DefaultObligationFacade underTest = new DefaultObligationFacade(obligationConverter, obligationService, sessionService, genericInstanceFactory);
+        final DefaultObligationFacade underTest = new DefaultObligationFacade(obligationConverter, obligationService, requestService, genericInstanceFactory);
         Assert.assertNotNull(underTest.save(incomeObligationData));
         verify(obligationService).save(obligationModel);
         verifyNoMoreInteractions(obligationService);
         verify(obligationConverter).reverseConvert(incomeObligationData);
         verify(obligationConverter).convert(obligationModel);
         verifyNoMoreInteractions(obligationConverter);
-        verify(sessionService).getCurrentUser();
-        verifyNoMoreInteractions(sessionService);
+        verify(requestService).getCurrentUser();
+        verifyNoMoreInteractions(requestService);
         verify(obligationModel).setUserId(userId);
         verify(currentUser).getId();
         verifyNoMoreInteractions(currentUser);
@@ -70,7 +70,7 @@ public class DefaultObligationFacadeTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testSaveNullableObligation() {
-        new DefaultObligationFacade(obligationConverter, obligationService, sessionService, genericInstanceFactory).save(null);
+        new DefaultObligationFacade(obligationConverter, obligationService, requestService, genericInstanceFactory).save(null);
     }
 
     @Test(expected = ModelNotFoundException.class)
@@ -79,7 +79,7 @@ public class DefaultObligationFacadeTest {
 
         when(obligationConverter.reverseConvert(obligationData)).thenThrow(ModelNotFoundException.class);
 
-        new DefaultObligationFacade(obligationConverter, obligationService, sessionService, genericInstanceFactory).save(obligationData);
+        new DefaultObligationFacade(obligationConverter, obligationService, requestService, genericInstanceFactory).save(obligationData);
     }
 
     @Test
@@ -91,12 +91,12 @@ public class DefaultObligationFacadeTest {
         when(obligationService.getById(id)).thenReturn(obligationModel);
         when(obligationConverter.convert(obligationModel)).thenReturn(obligationData);
 
-        Assert.assertNotNull(new DefaultObligationFacade(obligationConverter, obligationService, sessionService, genericInstanceFactory).search(id));
+        Assert.assertNotNull(new DefaultObligationFacade(obligationConverter, obligationService, requestService, genericInstanceFactory).search(id));
         verify(obligationService).getById(id);
         verifyNoMoreInteractions(obligationService);
         verify(obligationConverter).convert(obligationModel);
         verifyNoMoreInteractions(obligationConverter);
-        verifyZeroInteractions(sessionService);
+        verifyZeroInteractions(requestService);
         verifyZeroInteractions(obligationData);
         verifyZeroInteractions(obligationModel);
     }
@@ -107,7 +107,7 @@ public class DefaultObligationFacadeTest {
 
         when(obligationService.getById(id)).thenThrow(ModelNotFoundException.class);
 
-        new DefaultObligationFacade(obligationConverter, obligationService, sessionService, genericInstanceFactory).search(id);
+        new DefaultObligationFacade(obligationConverter, obligationService, requestService, genericInstanceFactory).search(id);
     }
 
     @Test
@@ -117,12 +117,12 @@ public class DefaultObligationFacadeTest {
 
         when(obligationService.getById(id)).thenReturn(obligation);
 
-        new DefaultObligationFacade(obligationConverter, obligationService, sessionService, genericInstanceFactory).delete(id);
+        new DefaultObligationFacade(obligationConverter, obligationService, requestService, genericInstanceFactory).delete(id);
         verify(obligationService).getById(id);
         verify(obligationService).delete(obligation);
         verifyNoMoreInteractions(obligationService);
         verifyZeroInteractions(obligationConverter);
-        verifyZeroInteractions(sessionService);
+        verifyZeroInteractions(requestService);
         verifyZeroInteractions(obligation);
     }
 
@@ -132,7 +132,7 @@ public class DefaultObligationFacadeTest {
 
         when(obligationService.getById(id)).thenThrow(ModelNotFoundException.class);
 
-        new DefaultObligationFacade(obligationConverter, obligationService, sessionService, genericInstanceFactory).delete(id);
+        new DefaultObligationFacade(obligationConverter, obligationService, requestService, genericInstanceFactory).delete(id);
     }
 
     @Test
@@ -149,12 +149,12 @@ public class DefaultObligationFacadeTest {
         final ObligationData obligationData = mock(ObligationData.class);
 
         when(genericInstanceFactory.getInstance(SearchQuery.class)).thenReturn(searchQuery);
-        when(sessionService.getCurrentUser()).thenReturn(currentUser);
+        when(requestService.getCurrentUser()).thenReturn(currentUser);
         when(obligationService.search(searchQuery, currentUser)).thenReturn(obligations);
         when(obligations.stream()).thenReturn(Stream.of(obligationModel));
         when(obligationConverter.convert(obligationModel)).thenReturn(obligationData);
 
-        final DefaultObligationFacade underTest = new DefaultObligationFacade(obligationConverter, obligationService, sessionService, genericInstanceFactory);
+        final DefaultObligationFacade underTest = new DefaultObligationFacade(obligationConverter, obligationService, requestService, genericInstanceFactory);
         final List<ObligationData> result = underTest.search(freeText, sortField, desc, page, limit);
         Assert.assertEquals(1, result.size());
         verify(searchQuery).setFreeText(freeText);
@@ -164,8 +164,8 @@ public class DefaultObligationFacadeTest {
         verify(searchQuery).setLimit(limit);
         verify(genericInstanceFactory).getInstance(SearchQuery.class);
         verifyNoMoreInteractions(genericInstanceFactory);
-        verify(sessionService).getCurrentUser();
-        verifyNoMoreInteractions(sessionService);
+        verify(requestService).getCurrentUser();
+        verifyNoMoreInteractions(requestService);
         verify(obligationService).search(searchQuery, currentUser);
         verifyNoMoreInteractions(obligationService);
         verify(obligationConverter).convert(obligationModel);

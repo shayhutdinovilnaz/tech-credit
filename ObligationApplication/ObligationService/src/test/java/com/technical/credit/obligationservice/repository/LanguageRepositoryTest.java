@@ -43,14 +43,14 @@ public class LanguageRepositoryTest {
 
     @Test
     public void testFindByActiveIsTrueAndIsoCode() {
-        final Optional<LanguageModel> result = underTest.findByActiveAndIsoCode("ru", true);
+        final Optional<LanguageModel> result = underTest.findByIsoCodeAndActive("ru", true);
         Assert.assertTrue(result.isPresent());
         Assert.assertEquals("ru", result.get().getIsoCode());
     }
 
     @Test
     public void testFindByActiveIsTrueAndIsoCode_InActive() {
-        final Optional<LanguageModel> result = underTest.findByActiveAndIsoCode("en", false);
-        Assert.assertFalse(result.isPresent());
+        final Optional<LanguageModel> result = underTest.findByIsoCodeAndActive("en", false);
+        Assert.assertTrue(result.isPresent());
     }
 }

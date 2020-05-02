@@ -17,7 +17,7 @@ public class DefaultLanguageService extends AbstractModelService<LanguageModel> 
     @Override
     public LanguageModel getByIsoCode(final String isoCode) {
         Assert.notNull(isoCode, "Iso code of language can't be nullable.");
-        return languageRepository.findByActiveAndIsoCode(isoCode, true).orElseThrow(() -> new ModelNotFoundException("Language isn't found. Required isoCode = " + isoCode));
+        return languageRepository.findByIsoCodeAndActive(isoCode, true).orElseThrow(() -> new ModelNotFoundException("Language isn't found. Required isoCode = " + isoCode));
     }
 
     @Override

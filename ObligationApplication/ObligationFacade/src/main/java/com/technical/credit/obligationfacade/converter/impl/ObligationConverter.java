@@ -7,7 +7,6 @@ import com.technical.credit.obligationfacade.data.SkillData;
 import com.technical.credit.obligationfacade.data.StatusData;
 import com.technical.credit.obligationfacade.data.UserData;
 import com.technical.credit.obligationservice.factory.GenericInstanceFactory;
-import com.technical.credit.obligationservice.model.ItemModel;
 import com.technical.credit.obligationservice.model.ObligationModel;
 import com.technical.credit.obligationservice.model.SkillModel;
 import com.technical.credit.obligationservice.model.StatusModel;
@@ -52,7 +51,7 @@ public class ObligationConverter implements Converter<ObligationData, Obligation
         target.setName(source.getName());
         target.setDescription(source.getDescription());
         target.setExpiredDate(source.getExpiredDate());
-        target.setUserId(Optional.ofNullable(source.getUser()).map(UserData::getId).map(userService::getById).map(ItemModel::getId).orElse(null));
+        target.setUserId(Optional.ofNullable(source.getUser()).map(UserData::getId).map(userService::getById).map(UserModel::getId).orElse(null));
         target.setSkill(Optional.ofNullable(source.getSkill()).map(skillConverter::reverseConvert).orElse(null));
         target.setStatus(Optional.ofNullable(source.getStatus()).map(statusConverter::reverseConvert).orElse(null));
         return target;

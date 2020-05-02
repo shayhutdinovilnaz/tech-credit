@@ -1,0 +1,26 @@
+package account.facade.impl;
+
+import account.facade.UserFacade;
+import account.facade.converter.Converter;
+import account.facade.data.UserData;
+import account.model.UserModel;
+import account.service.UserService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class DefaultUserFacade implements UserFacade {
+    private final UserService userService;
+    private final Converter<UserData, UserModel> userConverter;
+
+    @Override
+    public UserData getByUsername(final String username) {
+        return userConverter.convert(userService.getByUsername(username));
+    }
+
+    @Override
+    public UserData getById(long id) {
+        return userConverter.convert(userService.getById(id));
+    }
+}

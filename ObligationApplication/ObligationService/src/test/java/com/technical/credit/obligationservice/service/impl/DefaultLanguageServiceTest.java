@@ -28,10 +28,10 @@ public class DefaultLanguageServiceTest extends AbstractModelServiceTest<Languag
         final String isoCode = "ru";
         final Optional<LanguageModel> language = Optional.of(new LanguageModel());
 
-        when(languageRepository.findByActiveAndIsoCode(isoCode, true)).thenReturn(language);
+        when(languageRepository.findByIsoCodeAndActive(isoCode, true)).thenReturn(language);
 
         Assert.assertNotNull(underTest.getByIsoCode(isoCode));
-        verify(languageRepository).findByActiveAndIsoCode(isoCode, true);
+        verify(languageRepository).findByIsoCodeAndActive(isoCode, true);
         verifyNoMoreInteractions(languageRepository);
     }
 
@@ -40,7 +40,7 @@ public class DefaultLanguageServiceTest extends AbstractModelServiceTest<Languag
         final String isoCode = "ru";
         final Optional<LanguageModel> language = Optional.empty();
 
-        when(languageRepository.findByActiveAndIsoCode(isoCode, true)).thenReturn(language);
+        when(languageRepository.findByIsoCodeAndActive(isoCode, true)).thenReturn(language);
 
         underTest.getByIsoCode(isoCode);
     }

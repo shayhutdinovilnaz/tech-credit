@@ -2,7 +2,7 @@ package com.technical.credit.webapp.filter;
 
 import com.technical.credit.obligationservice.model.LanguageModel;
 import com.technical.credit.obligationservice.service.LanguageService;
-import com.technical.credit.obligationservice.service.SessionService;
+import com.technical.credit.obligationservice.service.RequestService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -22,16 +22,16 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SessionLanguageFilterTest {
+public class RequestLanguageFilterTest {
 
     @InjectMocks
-    private SessionLanguageFilter underTest;
+    private RequestLanguageFilter underTest;
 
     @Mock
     private LanguageService languageService;
 
     @Mock
-    private SessionService sessionService;
+    private RequestService requestService;
 
     @Test
     public void testFilter() throws IOException, ServletException {
@@ -50,8 +50,8 @@ public class SessionLanguageFilterTest {
         verifyNoMoreInteractions(request);
         verify(languageService).getByIsoCode(ruIsoCode);
         verifyNoMoreInteractions(languageService);
-        verify(sessionService).setCurrentLanguage(ruLanguage);
-        verifyNoMoreInteractions(sessionService);
+        verify(requestService).setCurrentLanguage(ruLanguage);
+        verifyNoMoreInteractions(requestService);
         verifyNoMoreInteractions(ruLanguage);
         verify(filterChain).doFilter(request, response);
         verifyNoInteractions(response);

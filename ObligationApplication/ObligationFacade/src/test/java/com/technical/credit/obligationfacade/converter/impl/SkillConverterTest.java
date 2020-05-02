@@ -7,7 +7,7 @@ import com.technical.credit.obligationservice.model.LanguageModel;
 import com.technical.credit.obligationservice.model.LocalizedStringModel;
 import com.technical.credit.obligationservice.model.SkillModel;
 import com.technical.credit.obligationservice.service.LocalizationService;
-import com.technical.credit.obligationservice.service.SessionService;
+import com.technical.credit.obligationservice.service.RequestService;
 import com.technical.credit.obligationservice.service.SkillService;
 import org.junit.Assert;
 import org.junit.Test;
@@ -33,7 +33,7 @@ public class SkillConverterTest {
     private GenericInstanceFactory genericInstanceFactory;
 
     @Mock
-    private SessionService sessionService;
+    private RequestService requestService;
 
     @Mock
     private LocalizationService localizationService;
@@ -52,7 +52,7 @@ public class SkillConverterTest {
 
         when(source.getName()).thenReturn(localizedSourceName);
         when(source.getId()).thenReturn(sourceId);
-        when(sessionService.getCurrentLanguage()).thenReturn(ruLang);
+        when(requestService.getCurrentLanguage()).thenReturn(ruLang);
         when(localizationService.getLocalizedStringValue(ruLang, localizedSourceName)).thenReturn(ruSourceName);
         when(genericInstanceFactory.getInstance(SkillData.class)).thenReturn(target);
 
@@ -60,8 +60,8 @@ public class SkillConverterTest {
         verify(source).getName();
         verify(source).getId();
         verifyNoMoreInteractions(source);
-        verify(sessionService).getCurrentLanguage();
-        verifyNoMoreInteractions(sessionService);
+        verify(requestService).getCurrentLanguage();
+        verifyNoMoreInteractions(requestService);
         verify(localizationService).getLocalizedStringValue(ruLang, localizedSourceName);
         verifyNoMoreInteractions(localizationService);
         verify(genericInstanceFactory).getInstance(SkillData.class);
@@ -86,7 +86,7 @@ public class SkillConverterTest {
 
         when(source.getName()).thenReturn(localizedSourceName);
         when(source.getId()).thenReturn(sourceId);
-        when(sessionService.getCurrentLanguage()).thenReturn(ruLang);
+        when(requestService.getCurrentLanguage()).thenReturn(ruLang);
         when(localizationService.getLocalizedStringValue(ruLang, localizedSourceName)).thenReturn(null);
         when(genericInstanceFactory.getInstance(SkillData.class)).thenReturn(target);
 
@@ -94,8 +94,8 @@ public class SkillConverterTest {
         verify(source).getName();
         verify(source).getId();
         verifyNoMoreInteractions(source);
-        verify(sessionService).getCurrentLanguage();
-        verifyNoMoreInteractions(sessionService);
+        verify(requestService).getCurrentLanguage();
+        verifyNoMoreInteractions(requestService);
         verify(localizationService).getLocalizedStringValue(ruLang, localizedSourceName);
         verifyNoMoreInteractions(localizationService);
         verify(genericInstanceFactory).getInstance(SkillData.class);
@@ -119,7 +119,7 @@ public class SkillConverterTest {
         when(source.getId()).thenReturn(sourceId);
         when(externalTarget.getId()).thenReturn(sourceId);
         when(externalTarget.getName()).thenReturn(localizedTargetName);
-        when(sessionService.getCurrentLanguage()).thenReturn(ruLang);
+        when(requestService.getCurrentLanguage()).thenReturn(ruLang);
         when(skillService.getById(sourceId)).thenReturn(internalTarget);
         when(internalTarget.getName()).thenReturn(localizedTargetName);
         when(localizationService.addLocalizedStringValue(ruLang, ruSourceName, localizedTargetName)).thenReturn(localizedTargetName);
@@ -130,8 +130,8 @@ public class SkillConverterTest {
         verify(source).getId();
         verifyNoMoreInteractions(source);
         verify(skillService).getById(sourceId);
-        verify(sessionService).getCurrentLanguage();
-        verifyNoMoreInteractions(sessionService);
+        verify(requestService).getCurrentLanguage();
+        verifyNoMoreInteractions(requestService);
         verify(localizationService).addLocalizedStringValue(ruLang, ruSourceName, localizedTargetName);
         verifyNoMoreInteractions(localizationService);
         verify(genericInstanceFactory).getInstance(SkillModel.class);
@@ -163,7 +163,7 @@ public class SkillConverterTest {
         when(source.getId()).thenReturn(sourceId);
         when(externalTarget.getId()).thenReturn(sourceId);
         when(externalTarget.getName()).thenReturn(localizedTargetName);
-        when(sessionService.getCurrentLanguage()).thenReturn(ruLang);
+        when(requestService.getCurrentLanguage()).thenReturn(ruLang);
         when(skillService.getById(sourceId)).thenReturn(internalTarget);
         when(internalTarget.getName()).thenReturn(localizedTargetName);
         when(localizationService.addLocalizedStringValue(ruLang, null, localizedTargetName)).thenReturn(localizedTargetName);
@@ -174,8 +174,8 @@ public class SkillConverterTest {
         verify(source).getId();
         verifyNoMoreInteractions(source);
         verify(skillService).getById(sourceId);
-        verify(sessionService).getCurrentLanguage();
-        verifyNoMoreInteractions(sessionService);
+        verify(requestService).getCurrentLanguage();
+        verifyNoMoreInteractions(requestService);
         verify(localizationService).addLocalizedStringValue(ruLang, null, localizedTargetName);
         verifyNoMoreInteractions(localizationService);
         verify(genericInstanceFactory).getInstance(SkillModel.class);
