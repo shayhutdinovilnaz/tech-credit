@@ -28,4 +28,8 @@ public class ObligationModel extends ItemModel {
     private Long userId;
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date expiredDate;
+    @ManyToOne
+    @JoinColumn
+    private CategoryModel category;
+
 }
