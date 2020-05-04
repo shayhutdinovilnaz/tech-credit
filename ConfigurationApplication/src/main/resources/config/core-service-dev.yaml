@@ -18,6 +18,17 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
+  main:
+    banner-mode: off
+
+displaynameconfig:
+  isocodes:
+    3308: ru
+    3309: eng
+  patterns:
+    ru: Привет, |f| |l|
+    eng: Hello, Mr/Ms |f| |l|
+    default: Hello, Friend!
 
 logging:
   file:

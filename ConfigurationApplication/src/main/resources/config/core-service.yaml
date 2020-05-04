@@ -2,7 +2,18 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+  main:
+    banner-mode: off
 
 logging:
   file:
     name: /var/log/tech-credit/core-service.log
+
+displaynameconfig:
+  isocodes:
+    3308: ru
+    3309: eng
+  patterns:
+    ru: Привет, |f| |l|
+    eng: Hello, Mr/Ms |f| |l|
+    default: Hello, Friend!
