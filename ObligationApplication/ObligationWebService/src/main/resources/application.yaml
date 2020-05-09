@@ -1,8 +1,11 @@
 spring:
   application:
-    name: obligation-app
+    name: core-service
+      main:
+        banner-mode: off
 
 security:
   oauth2:
     resource:
       user-info-uri:
+
