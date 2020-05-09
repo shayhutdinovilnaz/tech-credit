@@ -30,15 +30,6 @@ public class DefaultObligationService extends AbstractModelService<ObligationMod
         return obligationRepository.findObligationModelByNameContainingIgnoreCaseAndUserId(getQueryText(searchQuery.getFreeText()), buildPageRequest(searchQuery), user.getId());
     }
 
-    private String getQueryText(final String freeText) {
-        return Optional.ofNullable(freeText).map(String::trim).orElse(StringUtils.EMPTY);
-    }
-
-    private Pageable buildPageRequest(final SearchQuery searchQuery) {
-        final Sort sort = Sort.by(searchQuery.isDesc() ? Sort.Direction.DESC : Sort.Direction.ASC, searchQuery.getSortField());
-        return PageRequest.of(searchQuery.getPage(), searchQuery.getLimit(), sort);
-    }
-
     @Override
     protected JpaRepository<ObligationModel, Long> getItemRepository() {
         return obligationRepository;

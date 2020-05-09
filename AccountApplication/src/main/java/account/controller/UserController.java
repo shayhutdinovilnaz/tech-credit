@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/v1/users")
+//todo а регистрацию новых юзеров мы тут будем делать?
 public class UserController {
     private final UserFacade userFacade;
 

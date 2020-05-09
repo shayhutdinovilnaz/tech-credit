@@ -22,6 +22,7 @@ public class RequestLanguageFilter implements Filter {
     private final RequestService requestService;
 
     @Override
+    // todo
     public void doFilter(final ServletRequest servletRequest, final ServletResponse servletResponse, final FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         final LanguageModel requestLanguage = languageService.getByIsoCode(request.getHeader(REQUEST_HEADER_LANGUAGE_PARAM_NAME));

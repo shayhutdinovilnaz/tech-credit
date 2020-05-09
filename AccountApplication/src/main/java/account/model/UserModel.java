@@ -17,7 +17,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "user")
+@Table(name = "user") //todo название лучше изменить чтобы не было косяков при использовании postgres
 @Data
 @NoArgsConstructor
 public class UserModel implements Serializable {

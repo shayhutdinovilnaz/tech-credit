@@ -15,9 +15,9 @@ import static springfox.documentation.builders.PathSelectors.regex;
 
 @Configuration
 @ComponentScan(basePackages = "com.technical.credit")
-@EntityScan(basePackages = "com.technical.credit.obligationservice.model")
+@EntityScan(basePackages = "com.technical.credit.obligationservice.model") // todo почему то пишет якобы нет такого пути может идея тупит
 @EnableJpaRepositories(basePackages = "com.technical.credit.obligationservice.repository")
-@EnableSwagger2
+@EnableSwagger2 // todo я бы свагер и докер вынес в отдельный класс типа EnterpriseConfiguration
 public class ObligationWebApplicationConfiguration {
     @Bean
     public Docket bookStorageInfoApi() {
