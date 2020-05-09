@@ -12,6 +12,6 @@ import java.util.Set;
 public interface CategoryService extends ModelService<CategoryModel> {
 
     List<CategoryModel> search(SearchQuery searchQuery, UserModel user);
-    CategoryModel findById(Long categoryId);
+
     Set<CategoryModel> findByParentCategoryId(Long parentCategoryId);
 }

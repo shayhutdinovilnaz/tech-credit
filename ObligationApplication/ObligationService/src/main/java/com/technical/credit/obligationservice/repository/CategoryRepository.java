@@ -12,5 +12,5 @@ public interface CategoryRepository extends JpaRepository<CategoryModel, Long> {
 
     List<CategoryModel> findCategoryModelsByNameContainingIgnoreCaseAndUserId(final String name, final Pageable pageable, final long userId);
     Optional<CategoryModel> findCategoryModelById(Long categoryId);
-    Set<CategoryModel> findCategoryModelsByParentCategoryOrderByCreatedTime(Long parentCategoryId);
+    Set<CategoryModel> findCategoryModelsByParentCategoryIdOrderByCreatedTime(Long parentCategoryId);
 }

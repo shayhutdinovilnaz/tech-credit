@@ -34,6 +34,7 @@
         <mysql.version>8.0.19</mysql.version>
         <org.mockito.version>1.10.19</org.mockito.version>
         <junit.version>4.12</junit.version>
+        <spring-boot-configuration-processor.version>2.2.6.RELEASE</spring-boot-configuration-processor.version>
     </properties>
 
     <profiles>
@@ -103,7 +104,11 @@
                 <version>${junit.version}</version>
                 <scope>test</scope>
             </dependency>
-
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-configuration-processor</artifactId>
+                <version>${spring-boot-configuration-processor.version}</version>
+            </dependency>
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger2</artifactId>

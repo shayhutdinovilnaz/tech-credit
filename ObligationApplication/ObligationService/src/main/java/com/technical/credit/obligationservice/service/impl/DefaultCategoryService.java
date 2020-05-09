@@ -1,6 +1,5 @@
 package com.technical.credit.obligationservice.service.impl;
 
-import com.technical.credit.obligationservice.exception.ModelNotFoundException;
 import com.technical.credit.obligationservice.model.CategoryModel;
 import com.technical.credit.obligationservice.model.UserModel;
 import com.technical.credit.obligationservice.repository.CategoryRepository;
@@ -28,13 +27,8 @@ public class DefaultCategoryService extends AbstractModelService<CategoryModel> 
     }
 
     @Override
-    public CategoryModel findById(Long categoryId) {
-        return categoryRepository.findCategoryModelById(categoryId).orElseThrow(() -> new ModelNotFoundException("CategoryModel Not Found by categoryId = " + categoryId));
-    }
-
-    @Override
     public Set<CategoryModel> findByParentCategoryId(Long parentCategoryId) {
-        return categoryRepository.findCategoryModelsByParentCategoryOrderByCreatedTime(parentCategoryId);
+        return categoryRepository.findCategoryModelsByParentCategoryIdOrderByCreatedTime(parentCategoryId);
     }
 
     @Override

@@ -4,12 +4,13 @@ package com.technical.credit.obligationservice.model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+//todo написать сервисные методы для отчистки коллекций от удаленных id
 
 @Entity
 @Data
@@ -19,6 +20,17 @@ public class CategoryModel extends ItemModel {
     private String name;
     @Column(nullable = false)
     private Long userId;
+
+    private Long parentId;
+    @ElementCollection
+    @CollectionTable(name = "listOfchildrenCategoriesIds")
+    private Set<Long> childrenCategoriesIds = new HashSet<>();
+    @ElementCollection
+    @CollectionTable(name = "listOfobligationIds")
+    private Set<Long> obligationIds = new HashSet<>();
+
+    @Column(nullable = false)
+    private String description;
     @ManyToOne
     @JoinColumn
     private CategoryModel parentCategory;
