@@ -1,4 +1,4 @@
-package com.technical.credit.obligationfacade.converter;
+package com.technical.credit.core.converter;
 
 /**
  * Converting instance of object from source class to target class.

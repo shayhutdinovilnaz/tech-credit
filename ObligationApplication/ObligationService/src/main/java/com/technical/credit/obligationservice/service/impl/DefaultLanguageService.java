@@ -1,6 +1,6 @@
 package com.technical.credit.obligationservice.service.impl;
 
-import com.technical.credit.obligationservice.exception.ModelNotFoundException;
+import com.technical.credit.core.exception.ModelNotFoundException;
 import com.technical.credit.obligationservice.model.LanguageModel;
 import com.technical.credit.obligationservice.repository.LanguageRepository;
 import com.technical.credit.obligationservice.service.LanguageService;

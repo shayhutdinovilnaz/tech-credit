@@ -1,4 +1,4 @@
-package com.technical.credit.obligationservice.exception;
+package com.technical.credit.core.exception;
 
 /**
  * Exception is thrown when model isn't found in system.
@@ -18,3 +18,4 @@ public class ModelNotFoundException extends BusinessException {
         super(message, cause);
     }
 }
+

@@ -1,8 +1,9 @@
 package com.technical.credit.obligationservice.factory;
 
-import com.technical.credit.obligationservice.model.LanguageModel;
-import com.technical.credit.obligationservice.model.ObligationModel;
+import com.technical.credit.core.factory.GenericInstanceFactory;
 import org.junit.Test;
+
+import java.util.Date;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -13,8 +14,8 @@ public class GenericInstanceFactoryTest {
 
     @Test
     public void testGetInstanceSuccess() {
-        assertNotNull(underTest.getInstance(LanguageModel.class));
-        assertNotNull(underTest.getInstance(ObligationModel.class));
+        assertNotNull(underTest.getInstance(Date.class));
+        assertNotNull(underTest.getInstance(String.class));
     }
 
     @Test

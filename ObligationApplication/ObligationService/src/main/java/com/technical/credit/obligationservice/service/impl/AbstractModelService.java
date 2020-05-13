@@ -1,7 +1,7 @@
 package com.technical.credit.obligationservice.service.impl;
 
 
-import com.technical.credit.obligationservice.exception.ModelNotFoundException;
+import com.technical.credit.core.exception.ModelNotFoundException;
 import com.technical.credit.obligationservice.model.ItemModel;
 import com.technical.credit.obligationservice.service.ModelService;
 import org.springframework.data.jpa.repository.JpaRepository;

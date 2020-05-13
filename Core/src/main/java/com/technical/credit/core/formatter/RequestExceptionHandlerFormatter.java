@@ -1,4 +1,4 @@
-package com.technical.credit.webapp.formatter;
+package com.technical.credit.core.formatter;
 
 import org.springframework.http.HttpStatus;
 

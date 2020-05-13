@@ -1,5 +1,6 @@
 package com.technical.credit.webapp.controller;
 
+import com.technical.credit.core.controller.AbstractController;
 import com.technical.credit.obligationfacade.data.ObligationData;
 import com.technical.credit.obligationfacade.facade.ObligationFacade;
 import io.swagger.annotations.ApiResponse;

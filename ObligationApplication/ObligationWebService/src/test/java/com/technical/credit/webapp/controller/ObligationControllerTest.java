@@ -3,7 +3,7 @@ package com.technical.credit.webapp.controller;
 
 import com.technical.credit.obligationfacade.data.ObligationData;
 import com.technical.credit.obligationfacade.facade.ObligationFacade;
-import com.technical.credit.obligationservice.exception.ModelNotFoundException;
+import com.technical.credit.core.exception.ModelNotFoundException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

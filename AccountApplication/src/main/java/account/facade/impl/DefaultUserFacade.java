@@ -1,12 +1,13 @@
 package account.facade.impl;
 
 import account.facade.UserFacade;
-import account.facade.converter.Converter;
 import account.facade.data.UserData;
 import account.model.UserModel;
 import account.service.UserService;
+import com.technical.credit.core.converter.Converter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 @Service
 @RequiredArgsConstructor
@@ -16,6 +17,7 @@ public class DefaultUserFacade implements UserFacade {
 
     @Override
     public UserData getByUsername(final String username) {
+        Assert.notNull(username, "A username could not be nullable.");
         return userConverter.convert(userService.getByUsername(username));
     }
 

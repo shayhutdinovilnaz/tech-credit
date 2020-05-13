@@ -1,4 +1,4 @@
-package com.technical.credit.obligationservice.factory;
+package com.technical.credit.core.factory;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

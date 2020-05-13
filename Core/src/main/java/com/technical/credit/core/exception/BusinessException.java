@@ -1,4 +1,4 @@
-package com.technical.credit.obligationservice.exception;
+package com.technical.credit.core.exception;
 
 /**
  * Exception is thrown when wrong in anything business logic.

@@ -13,6 +13,7 @@
         <module>ConfigurationApplication</module>
         <module>ObligationApplication</module>
         <module>AccountApplication</module>
+        <module>Core</module>
     </modules>
 
 </project>

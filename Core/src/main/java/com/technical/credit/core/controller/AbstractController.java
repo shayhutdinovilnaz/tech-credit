@@ -1,7 +1,7 @@
-package com.technical.credit.webapp.controller;
+package com.technical.credit.core.controller;
 
-import com.technical.credit.obligationservice.exception.ModelNotFoundException;
-import com.technical.credit.webapp.formatter.RequestExceptionHandlerFormatter;
+import com.technical.credit.core.exception.ModelNotFoundException;
+import com.technical.credit.core.formatter.RequestExceptionHandlerFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
