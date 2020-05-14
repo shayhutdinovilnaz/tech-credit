@@ -21,17 +21,6 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class UserModel implements Serializable {
-    public UserModel(UserModel user) {
-        this.username = user.getUsername();
-        this.password = user.getPassword();
-        this.email = user.getEmail();
-        this.enabled = user.isEnabled();
-        this.accountNonExpired = user.isAccountNonExpired();
-        this.credentialsNonExpired = user.isCredentialsNonExpired();
-        this.accountNonLocked = user.isAccountNonLocked();
-        this.roles = user.getRoles();
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
