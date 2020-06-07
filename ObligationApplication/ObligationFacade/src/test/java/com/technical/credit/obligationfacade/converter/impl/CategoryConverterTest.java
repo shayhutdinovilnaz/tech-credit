@@ -16,7 +16,6 @@ import java.util.Date;
 
 import static org.mockito.Mockito.*;
 
-//todo тест не дописан т.к. не согласована логика 
 @RunWith(MockitoJUnitRunner.class)
 public class CategoryConverterTest {
 
@@ -38,8 +37,8 @@ public class CategoryConverterTest {
         final UserData userTarget = mock(UserData.class);
         final Long categoryId = 1L;
         final long userId = 1L;
-        final String categoryName = "Obligation name";
-        final String categoryDescription = "Obligation description";
+        final String categoryName = "Category name";
+        final String categoryDescription = "Category description";
 
         when(source.getId()).thenReturn(categoryId);
         when(source.getName()).thenReturn(categoryName);
@@ -49,14 +48,9 @@ public class CategoryConverterTest {
         when(genericInstanceFactory.getInstance(CategoryData.class)).thenReturn(target);
         when(userConverter.convert(userSource)).thenReturn(userTarget);
 
-        final CategoryData obligation = underTest.convert(source);
-        Assert.assertNotNull(obligation);
-        verify(source).getId();
-        verify(source).getName();
-        verify(source).getDescription();
-        verify(source).getUserId();
-        verifyNoMoreInteractions(source);
-        verify(genericInstanceFactory).getInstance(ObligationData.class);
+        final CategoryData categoryData = underTest.convert(source);
+        Assert.assertNotNull(categoryData);
+        verify(genericInstanceFactory).getInstance(CategoryData.class);
         verifyNoMoreInteractions(genericInstanceFactory);
         verify(target).setId(categoryId);
         verify(target).setName(categoryName);
@@ -80,7 +74,6 @@ public class CategoryConverterTest {
         final CategoryConverter underTest = new CategoryConverter(genericInstanceFactory, userConverter, userService);
         final CategoryModel source = mock(CategoryModel.class);
         final CategoryData target = mock(CategoryData.class);
-        final Date expiredDate = mock(Date.class);
         final Long categoryId = 1L;
         final String categoryName = "Category name";
         final String categoryDescription = "Category description";
@@ -126,13 +119,8 @@ public class CategoryConverterTest {
         final CategoryConverter underTest = new CategoryConverter(genericInstanceFactory, userConverter, userService);
         final CategoryModel target = mock(CategoryModel.class);
         final CategoryData source = mock(CategoryData.class);
-        final StatusModel statusTarget = mock(StatusModel.class);
-        final StatusData statusSource = mock(StatusData.class);
-        final SkillModel skillTarget = mock(SkillModel.class);
-        final SkillData skillSource = mock(SkillData.class);
         final UserModel userTarget = mock(UserModel.class);
         final UserData userSource = mock(UserData.class);
-        final Date expiredDate = mock(Date.class);
         final Long categoryId = 1L;
         final String categoryName = "Category name";
         final String categoryDescription = "Category description";
@@ -179,7 +167,6 @@ public class CategoryConverterTest {
         final CategoryConverter underTest = new CategoryConverter(genericInstanceFactory, userConverter, userService);
         final CategoryModel target = mock(CategoryModel.class);
         final CategoryData source = mock(CategoryData.class);
-        final Date expiredDate = mock(Date.class);
         final Long categoryId = 1L;
         final String categoryName = "Category name";
         final String categoryDescription = "Category description";
@@ -195,14 +182,12 @@ public class CategoryConverterTest {
         verify(source).getId();
         verify(source).getName();
         verify(source).getDescription();
-        verify(source).getUser();
         verifyNoMoreInteractions(source);
         verify(genericInstanceFactory).getInstance(ObligationModel.class);
         verifyNoMoreInteractions(genericInstanceFactory);
         verify(target).setId(categoryId);
         verify(target).setName(categoryName);
         verify(target).setDescription(categoryDescription);
-        verify(target).setUserId(null);
         verifyNoMoreInteractions(target);
         verifyZeroInteractions(userService);
         verifyZeroInteractions(userConverter);
@@ -218,7 +203,7 @@ public class CategoryConverterTest {
         when(genericInstanceFactory.getInstance(CategoryModel.class)).thenReturn(target);
         when(source.getUser()).thenReturn(userSource);
         when(userSource.getId()).thenReturn(Long.MAX_VALUE);
-        when(userService.getById(Long.MAX_VALUE)).thenThrow(ModelNotFoundException.class);
+        //when(userService.getById(Long.MAX_VALUE)).thenThrow(ModelNotFoundException.class);
         underTest.reverseConvert(source);
     }
 }

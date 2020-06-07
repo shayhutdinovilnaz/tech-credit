@@ -1,16 +1,19 @@
 package com.technical.credit.obligationservice.service.impl;
 
+import com.technical.credit.obligationservice.exception.ModelNotFoundException;
 import com.technical.credit.obligationservice.model.CategoryModel;
 import com.technical.credit.obligationservice.model.UserModel;
 import com.technical.credit.obligationservice.repository.CategoryRepository;
 import com.technical.credit.obligationservice.service.CategoryService;
 import com.technical.credit.obligationservice.service.SearchQuery;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service

@@ -13,8 +13,7 @@ public interface CategoryFacade {
     CategoryData search(long id);
 
     List<CategoryData> search(String freeText, String sortField, boolean desc, int page, int limit);
-
-    Set<CategoryModel> findByParentCategoryId(Long parentCategoryId);
+    Set<CategoryData> findByParentCategoryId(Long parentCategoryId);
 
     void delete(long id);
 }

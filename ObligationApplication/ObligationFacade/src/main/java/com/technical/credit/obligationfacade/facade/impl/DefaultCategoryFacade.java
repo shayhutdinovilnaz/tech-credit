@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class DefaultCategoryFacade implements CategoryFacade {
-    private final Converter<CategoryData, CategoryModel> categoryModelConverter;
+    private final Converter<CategoryData, CategoryModel> categoryConverter;
     private final CategoryService categoryService;
     private final RequestService requestService;
     private final GenericInstanceFactory genericInstanceFactory;
@@ -31,15 +31,15 @@ public class DefaultCategoryFacade implements CategoryFacade {
     public CategoryData save(final CategoryData CategoryData) {
         Assert.notNull(CategoryData, "Domain class must not be null!");
 
-        final CategoryModel categoryModel = categoryModelConverter.reverseConvert(CategoryData);
+        final CategoryModel categoryModel = categoryConverter.reverseConvert(CategoryData);
         categoryModel.setUserId(requestService.getCurrentUser().getId());
         categoryService.save(categoryModel);
-        return categoryModelConverter.convert(categoryModel);
+        return categoryConverter.convert(categoryModel);
     }
 
     @Override
     public CategoryData search(final long id) {
-        return categoryModelConverter.convert(categoryService.getById(id));
+        return categoryConverter.convert(categoryService.getById(id));
     }
 
     @Override
@@ -54,13 +54,17 @@ public class DefaultCategoryFacade implements CategoryFacade {
         return Optional.ofNullable(categoryService.search(searchQuery, requestService.getCurrentUser()))
                 .orElseGet(Collections::emptyList)
                 .stream()
-                .map(categoryModelConverter::convert)
+                .map(categoryConverter::convert)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Set<CategoryModel> findByParentCategoryId(Long parentCategoryId) {
-        return categoryService.findByParentCategoryId(parentCategoryId);
+    public Set<CategoryData> findByParentCategoryId(Long parentCategoryId) {
+        return Optional.ofNullable(categoryService.findByParentCategoryId(parentCategoryId))
+                .orElseGet(Collections::emptySet)
+                .stream()
+                .map(categoryConverter::convert)
+                .collect(Collectors.toSet());
     }
 
 

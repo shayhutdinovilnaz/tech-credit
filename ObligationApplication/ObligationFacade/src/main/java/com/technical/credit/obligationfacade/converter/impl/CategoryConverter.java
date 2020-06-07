@@ -29,8 +29,6 @@ public class CategoryConverter implements Converter<CategoryData, CategoryModel>
         target.setName(source.getName());
         target.setDescription(source.getDescription());
         target.setParentCategoryId(source.getParentId());
-        target.setChildrenCategoriesIds(source.getChildrenCategoriesIds());
-        target.setObligationIds(source.getObligationIds());
         target.setUser(Optional.ofNullable(source.getUserId()).map(userService::getById).map(userConverter::convert).orElse(null));
         return target;
     }
@@ -45,8 +43,6 @@ public class CategoryConverter implements Converter<CategoryData, CategoryModel>
         target.setDescription(source.getDescription());
         target.setUserId(source.getUserId());
         target.setParentId(source.getParentCategoryId());
-        target.setChildrenCategoriesIds(source.getChildrenCategoriesIds());
-        target.setObligationIds(source.getObligationIds());
         return target;
     }
 }

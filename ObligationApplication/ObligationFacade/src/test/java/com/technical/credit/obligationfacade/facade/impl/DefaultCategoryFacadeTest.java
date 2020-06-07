@@ -167,7 +167,6 @@ public class DefaultCategoryFacadeTest {
         verify(requestService).getCurrentUser();
         verifyNoMoreInteractions(requestService);
         verify(categoryService).search(searchQuery, currentUser);
-        verify(categoryService).findByParentCategoryId(anyLong()); // todo
         verifyNoMoreInteractions(categoryService);
         verify(categoryConverter).convert(CategoryModel);
         verifyNoMoreInteractions(categoryConverter);
