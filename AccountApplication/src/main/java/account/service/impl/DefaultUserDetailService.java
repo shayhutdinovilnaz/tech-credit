@@ -22,7 +22,7 @@ public class DefaultUserDetailService implements UserDetailsService {
     public UserDetails loadUserByUsername(final String username) {
         Assert.notNull(username, "A username could not be nullable.");
         final UserModel user =
-                userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Username or password wrong"));
+                userRepository.findByUsernameIgnoreCase(username).orElseThrow(() -> new UsernameNotFoundException("Username or password wrong"));
         final AuthDetailModel userDetails = getAuthDetail(user);
         checkAccount(userDetails);
         return userDetails;

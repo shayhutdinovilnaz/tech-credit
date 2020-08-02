@@ -1,13 +1,11 @@
 package com.technical.credit.webapp.controller;
 
 
-import com.technical.credit.obligationfacade.data.ObligationData;
-import com.technical.credit.obligationfacade.facade.ObligationFacade;
 import com.technical.credit.core.exception.ModelNotFoundException;
+import com.technical.credit.obligationfacade.data.ObligationData;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -27,11 +25,8 @@ import static org.mockito.Mockito.when;
 @RunWith(SpringRunner.class)
 public class ObligationControllerTest extends AbstractControllerTest {
 
-    @MockBean
-    ObligationFacade obligationFacade;
-
     @Test
-    @WithMockUser(authorities = "create_profile")
+    @WithMockUser(authorities = "create_obligation")
     public void testSave() throws Exception {
         final ObligationData requestObligationData = new ObligationData();
         final ObligationData responseObligationData = new ObligationData();
@@ -49,7 +44,7 @@ public class ObligationControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    @WithMockUser(authorities = "create_profile")
+    @WithMockUser(authorities = "create_obligation")
     public void testSaveWithNotExistAttribute() throws Exception {
         final ObligationData requestObligationData = new ObligationData();
         final String jsonBody = parseToJson(requestObligationData);
@@ -66,7 +61,7 @@ public class ObligationControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    @WithMockUser(authorities = "read_profile")
+    @WithMockUser(authorities = "read_obligation")
     public void testSearchById() throws Exception {
         final String url = "/api/v1/obligations/1";
         final ObligationData obligation = new ObligationData();
@@ -79,7 +74,7 @@ public class ObligationControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    @WithMockUser(authorities = "read_profile")
+    @WithMockUser(authorities = "read_obligation")
     public void testSearchByIdNotFound() throws Exception {
         final String url = "/api/v1/obligations/1";
 
@@ -91,7 +86,7 @@ public class ObligationControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    @WithMockUser(authorities = "delete_profile")
+    @WithMockUser(authorities = "delete_obligation")
     public void testSuccessfulDeleteBookById() throws Exception {
         final String url = "/api/v1/obligations/1";
 
@@ -101,7 +96,7 @@ public class ObligationControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    @WithMockUser(authorities = "delete_profile")
+    @WithMockUser(authorities = "delete_obligation")
     public void testAttemptToDeleteNotExistBook() throws Exception {
         final String url = "/api/v1/obligations/1";
 
@@ -113,7 +108,7 @@ public class ObligationControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    @WithMockUser(authorities = "read_profile")
+    @WithMockUser(authorities = "read_obligation")
     public void testSearchByQuery() throws Exception {
         final String url = "/api/v1/obligations/search";
         final String query = "Free text";

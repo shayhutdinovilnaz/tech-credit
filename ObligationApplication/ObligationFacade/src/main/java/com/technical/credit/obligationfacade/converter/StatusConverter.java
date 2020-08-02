@@ -1,4 +1,4 @@
-package com.technical.credit.obligationfacade.converter.impl;
+package com.technical.credit.obligationfacade.converter;
 
 import com.technical.credit.core.converter.Converter;
 import com.technical.credit.obligationfacade.data.StatusData;

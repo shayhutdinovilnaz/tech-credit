@@ -1,5 +1,6 @@
 package account.facade.converter.impl;
 
+import account.facade.converter.UserConverter;
 import account.facade.data.UserData;
 import account.model.UserModel;
 import com.technical.credit.core.factory.GenericInstanceFactory;

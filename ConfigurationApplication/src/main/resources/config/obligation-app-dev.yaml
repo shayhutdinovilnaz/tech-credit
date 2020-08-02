@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/tech-credit?createDatabaseIfNotExist=true&useUnicode=true&serverTimezone=UTC&
+    url: jdbc:mysql://localhost:3306/techcredit?createDatabaseIfNotExist=true&useUnicode=true&serverTimezone=UTC&
     username: root
     password: Qwerty-2
     driver-class-name: com.mysql.cj.jdbc.Driver

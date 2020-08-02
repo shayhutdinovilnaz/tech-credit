@@ -51,7 +51,7 @@ public class DefaultUserDetailServiceTest {
         final boolean locked = false;
         final List<RoleModel> roles = new ArrayList<>();
 
-        when(userRepository.findByUsername(username)).thenReturn(Optional.of(user));
+        when(userRepository.findByUsernameIgnoreCase(username)).thenReturn(Optional.of(user));
         when(user.getUsername()).thenReturn(username);
         when(user.getFirstName()).thenReturn(firstName);
         when(user.getLastName()).thenReturn(lastName);
@@ -67,7 +67,7 @@ public class DefaultUserDetailServiceTest {
         when(genericInstanceFactory.getInstance(AccountStatusUserDetailsChecker.class)).thenReturn(accountStatusChecker);
 
         Assert.assertNotNull(underTest.loadUserByUsername(username));
-        verify(userRepository).findByUsername(username);
+        verify(userRepository).findByUsernameIgnoreCase(username);
         verifyNoMoreInteractions(userRepository);
 
         verify(genericInstanceFactory).getInstance(AuthDetailModel.class);
@@ -105,7 +105,7 @@ public class DefaultUserDetailServiceTest {
     public void testLoadUserByUsernameNotFound() {
         final String username = "ourUser";
 
-        when(userRepository.findByUsername(username)).thenReturn(Optional.empty());
+        when(userRepository.findByUsernameIgnoreCase(username)).thenReturn(Optional.empty());
 
         underTest.loadUserByUsername(username);
     }

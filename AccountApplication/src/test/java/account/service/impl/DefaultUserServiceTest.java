@@ -33,10 +33,10 @@ public class DefaultUserServiceTest {
         final Optional<UserModel> userOptional = Optional.of(user);
         final String username = "username";
 
-        when(userRepository.findByUsername(username)).thenReturn(userOptional);
+        when(userRepository.findByUsernameIgnoreCase(username)).thenReturn(userOptional);
 
         Assert.assertNotNull(underTest.getByUsername(username));
-        verify(userRepository).findByUsername(username);
+        verify(userRepository).findByUsernameIgnoreCase(username);
         verifyNoMoreInteractions(userRepository);
         verifyNoInteractions(user);
     }
@@ -45,7 +45,7 @@ public class DefaultUserServiceTest {
     public void testGetByUsernameNotFound() {
         final String username = "username";
 
-        when(userRepository.findByUsername(username)).thenReturn(Optional.empty());
+        when(userRepository.findByUsernameIgnoreCase(username)).thenReturn(Optional.empty());
 
         underTest.getByUsername(username);
     }

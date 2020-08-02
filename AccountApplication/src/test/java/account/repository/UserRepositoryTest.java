@@ -38,7 +38,7 @@ public class UserRepositoryTest {
 
     @Test
     public void testFindByUsername() {
-        final Optional<UserModel> result = underTest.findByUsername("Johnny");
+        final Optional<UserModel> result = underTest.findByUsernameIgnoreCase("Johnny");
         Assert.assertTrue(result.isPresent());
         Assert.assertEquals("Johnny", result.get().getUsername());
     }

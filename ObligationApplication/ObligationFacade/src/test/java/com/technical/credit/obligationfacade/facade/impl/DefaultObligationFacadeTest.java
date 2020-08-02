@@ -1,6 +1,6 @@
 package com.technical.credit.obligationfacade.facade.impl;
 
-import com.technical.credit.obligationfacade.converter.impl.ObligationConverter;
+import com.technical.credit.obligationfacade.converter.ObligationConverter;
 import com.technical.credit.obligationfacade.data.ObligationData;
 import com.technical.credit.core.exception.ModelNotFoundException;
 import com.technical.credit.core.factory.GenericInstanceFactory;
@@ -59,10 +59,7 @@ public class DefaultObligationFacadeTest {
         verify(obligationConverter).reverseConvert(incomeObligationData);
         verify(obligationConverter).convert(obligationModel);
         verifyNoMoreInteractions(obligationConverter);
-        verify(requestService).getCurrentUser();
         verifyNoMoreInteractions(requestService);
-        verify(obligationModel).setUserId(userId);
-        verify(currentUser).getId();
         verifyNoMoreInteractions(currentUser);
         verifyZeroInteractions(incomeObligationData);
         verifyZeroInteractions(outcomeObligationData);

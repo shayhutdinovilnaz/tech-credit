@@ -17,8 +17,6 @@ import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
 public class UserControllerTest extends AbstractControllerTest {
-    @MockBean
-    UserFacade userFacade;
 
     @Test
     @WithMockUser
