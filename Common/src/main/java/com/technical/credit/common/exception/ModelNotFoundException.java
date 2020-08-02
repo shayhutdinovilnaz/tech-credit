@@ -1,4 +1,4 @@
-package com.technical.credit.obligationservice.exception;
+package com.technical.credit.common.exception;
 
 /**
  * Exception is thrown when model isn't found in system.

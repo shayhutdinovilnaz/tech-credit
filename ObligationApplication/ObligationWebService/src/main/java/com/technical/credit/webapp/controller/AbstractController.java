@@ -1,6 +1,6 @@
 package com.technical.credit.webapp.controller;
 
-import com.technical.credit.obligationservice.exception.ModelNotFoundException;
+import com.technical.credit.common.exception.ModelNotFoundException;
 import com.technical.credit.webapp.formatter.RequestExceptionHandlerFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

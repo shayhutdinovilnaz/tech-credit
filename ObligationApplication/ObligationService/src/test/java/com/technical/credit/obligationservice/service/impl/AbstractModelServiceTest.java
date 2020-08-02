@@ -1,7 +1,7 @@
 package com.technical.credit.obligationservice.service.impl;
 
 
-import com.technical.credit.obligationservice.exception.ModelNotFoundException;
+import com.technical.credit.common.exception.ModelNotFoundException;
 import com.technical.credit.obligationservice.model.ItemModel;
 import org.junit.Assert;
 import org.junit.Test;

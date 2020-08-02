@@ -1,6 +1,7 @@
 package com.technical.credit.obligationfacade.converter.impl;
 
 
+import com.technical.credit.obligationfacade.converter.SkillConverter;
 import com.technical.credit.obligationfacade.data.SkillData;
 import com.technical.credit.obligationservice.factory.GenericInstanceFactory;
 import com.technical.credit.obligationservice.model.LanguageModel;

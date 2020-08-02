@@ -14,4 +14,5 @@ public class ObligationData implements Serializable {
     private StatusData status;
     private Date expiredDate;
     private UserData user;
+    private Long categoryId;
 }

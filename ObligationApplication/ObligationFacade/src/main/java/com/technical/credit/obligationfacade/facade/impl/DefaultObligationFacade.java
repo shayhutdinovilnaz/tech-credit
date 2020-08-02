@@ -1,7 +1,7 @@
 package com.technical.credit.obligationfacade.facade.impl;
 
 
-import com.technical.credit.obligationfacade.converter.Converter;
+import com.technical.credit.common.converter.Converter;
 import com.technical.credit.obligationfacade.data.ObligationData;
 import com.technical.credit.obligationfacade.facade.ObligationFacade;
 import com.technical.credit.obligationservice.factory.GenericInstanceFactory;
@@ -15,6 +15,7 @@ import org.springframework.util.Assert;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -31,7 +32,10 @@ public class DefaultObligationFacade implements ObligationFacade {
         Assert.notNull(obligationData, "Domain class must not be null!");
 
         final ObligationModel obligationModel = obligationConverter.reverseConvert(obligationData);
-        obligationModel.setUserId(requestService.getCurrentUser().getId());
+        if (Objects.isNull(obligationModel.getUserId())) {
+            obligationModel.setUserId(requestService.getCurrentUser().getId());
+        }
+
         obligationService.save(obligationModel);
         return obligationConverter.convert(obligationModel);
     }

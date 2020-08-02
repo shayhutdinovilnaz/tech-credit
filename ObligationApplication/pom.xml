@@ -11,8 +11,8 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.technical.credit.obligation</groupId>
-    <artifactId>obligation-application</artifactId>
+    <groupId>com.technical.credit</groupId>
+    <artifactId>obligation</artifactId>
     <version>0.0.1</version>
     <packaging>pom</packaging>
 
@@ -61,6 +61,12 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>obligation-facade</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>common</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

@@ -1,8 +1,8 @@
-package account.facade.converter.impl;
+package account.facade.converter;
 
-import account.facade.converter.Converter;
 import account.facade.data.UserData;
 import account.model.UserModel;
+import com.technical.credit.common.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
@@ -19,5 +19,10 @@ public class UserConverter implements Converter<UserData, UserModel> {
         target.setLastName(source.getLastName());
         target.setEmail(source.getEmail());
         return target;
+    }
+
+    @Override
+    public UserModel reverseConvert(UserData source) {
+        throw new UnsupportedOperationException("Method is not supported.");
     }
 }

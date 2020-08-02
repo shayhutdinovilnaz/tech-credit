@@ -18,7 +18,7 @@ public class CategoryModel extends ItemModel {
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
-    private Long userId;
+    private Long ownerId;
     @ManyToOne
     @JoinColumn
     private CategoryModel parentCategory;

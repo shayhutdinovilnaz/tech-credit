@@ -30,7 +30,7 @@ public class ObligationController extends AbstractController {
             @ApiResponse(code = 200, message = "Instance of obligation is saved in the system."),
             @ApiResponse(code = 410, message = "A some of the domain isn't found in the system"),
     })
-    @PreAuthorize("hasAuthority('create_profile')")
+    @PreAuthorize("hasAuthority('create_obligation')")
     public ResponseEntity<ObligationData> save(@RequestBody final ObligationData obligation) {
         return new ResponseEntity<>(obligationFacade.save(obligation), HttpStatus.CREATED);
     }
@@ -40,7 +40,7 @@ public class ObligationController extends AbstractController {
             @ApiResponse(code = 200, message = "Instance of obligation is found in the system."),
             @ApiResponse(code = 410, message = "A some of the domain isn't found in the system"),
     })
-    @PreAuthorize("hasAuthority('read_profile')")
+    @PreAuthorize("hasAuthority('read_obligation')")
     public ResponseEntity<ObligationData> search(@PathVariable long id) {
         return new ResponseEntity<>(obligationFacade.search(id), HttpStatus.OK);
     }
@@ -49,7 +49,7 @@ public class ObligationController extends AbstractController {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Instances of obligations are found in the system."),
     })
-    @PreAuthorize("hasAuthority('read_profile')")
+    @PreAuthorize("hasAuthority('read_obligation')")
     public ResponseEntity<List<ObligationData>> search(@RequestParam(required = false) String query,
                                                        @RequestParam(defaultValue = "createdTime", required = false) String sortField,
                                                        @RequestParam(required = false, defaultValue = "false") boolean desc,
@@ -63,7 +63,7 @@ public class ObligationController extends AbstractController {
             @ApiResponse(code = 204, message = "The instance of obligation is removed from the system."),
             @ApiResponse(code = 410, message = "A required domain isn't found in the system")
     })
-    @PreAuthorize("hasAuthority('delete_profile')")
+    @PreAuthorize("hasAuthority('delete_obligation')")
     public ResponseEntity<ObligationData> delete(@PathVariable long id) {
         obligationFacade.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

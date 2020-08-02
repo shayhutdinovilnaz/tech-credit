@@ -18,7 +18,7 @@ public class DefaultUserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String userName) {
         final UserModel user =
-                userRepository.findByUsername(userName).orElseThrow(() -> new UsernameNotFoundException("Username or password wrong"));
+                userRepository.findByUsernameIgnoreCase(userName).orElseThrow(() -> new UsernameNotFoundException("Username or password wrong"));
 
         final UserDetails userDetails = new AuthDetailModel(user);
         new AccountStatusUserDetailsChecker().check(userDetails);

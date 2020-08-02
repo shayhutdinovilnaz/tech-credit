@@ -1,6 +1,6 @@
-package com.technical.credit.obligationfacade.converter.impl;
+package com.technical.credit.obligationfacade.converter;
 
-import com.technical.credit.obligationfacade.converter.Converter;
+import com.technical.credit.common.converter.Converter;
 import com.technical.credit.obligationfacade.data.StatusData;
 import com.technical.credit.obligationservice.factory.GenericInstanceFactory;
 import com.technical.credit.obligationservice.model.StatusModel;
