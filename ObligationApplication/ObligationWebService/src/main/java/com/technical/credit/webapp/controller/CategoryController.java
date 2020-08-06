@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -25,7 +26,7 @@ public class CategoryController extends AbstractController {
             @ApiResponse(code = 410, message = "A some of the domain isn't found in the system"),
     })
     @PreAuthorize("hasAuthority('create_category')")
-    public ResponseEntity<CategoryData> save(@RequestBody final CategoryData category) {
+    public ResponseEntity<CategoryData> save(@Valid @RequestBody final CategoryData category) {
         return new ResponseEntity<>(categoryFacade.save(category), HttpStatus.CREATED);
     }
 

@@ -5,11 +5,15 @@ import com.technical.credit.core.converter.Converter;
 import com.technical.credit.obligationfacade.data.ObligationData;
 import com.technical.credit.obligationfacade.facade.ObligationFacade;
 import com.technical.credit.core.factory.GenericInstanceFactory;
+import com.technical.credit.obligationservice.model.CategoryModel;
 import com.technical.credit.obligationservice.model.ObligationModel;
+import com.technical.credit.obligationservice.service.CategoryService;
 import com.technical.credit.obligationservice.service.ObligationService;
 import com.technical.credit.obligationservice.service.RequestService;
 import com.technical.credit.obligationservice.service.SearchQuery;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -22,9 +26,12 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class DefaultObligationFacade implements ObligationFacade {
+    private static final Logger LOG = LoggerFactory.getLogger(DefaultObligationFacade.class);
+
     private final Converter<ObligationData, ObligationModel> obligationConverter;
     private final ObligationService obligationService;
     private final RequestService requestService;
+    private final CategoryService categoryService;
     private final GenericInstanceFactory genericInstanceFactory;
 
     @Override
@@ -64,5 +71,15 @@ public class DefaultObligationFacade implements ObligationFacade {
     @Override
     public void delete(final long id) {
         obligationService.delete(obligationService.getById(id));
+    }
+
+    @Override
+    public void assignToCategory(long obligationID, long categoryID) {
+
+        final ObligationModel obligation = obligationService.getById(obligationID);
+        final CategoryModel category = categoryService.getById(categoryID);
+        obligationService.addToCategory(obligation, category);
+
+        LOG.debug("Obligation is added to category. Obligation id: {}, category id: {}", obligationID, categoryID);
     }
 }

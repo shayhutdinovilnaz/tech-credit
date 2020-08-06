@@ -1,5 +1,6 @@
 package com.technical.credit.obligationservice.service.impl;
 
+import com.technical.credit.obligationservice.model.CategoryModel;
 import com.technical.credit.obligationservice.model.ObligationModel;
 import com.technical.credit.obligationservice.model.UserModel;
 import com.technical.credit.obligationservice.repository.ObligationRepository;
@@ -37,6 +38,15 @@ public class DefaultObligationService extends AbstractModelService<ObligationMod
     private Pageable buildPageRequest(final SearchQuery searchQuery) {
         final Sort sort = Sort.by(searchQuery.isDesc() ? Sort.Direction.DESC : Sort.Direction.ASC, searchQuery.getSortField());
         return PageRequest.of(searchQuery.getPage(), searchQuery.getLimit(), sort);
+    }
+
+    @Override
+    public void addToCategory(final ObligationModel obligation, final CategoryModel category) {
+        Assert.notNull(obligation, "Obligation must not be null!");
+        Assert.notNull(category, "Category must not be null!");
+
+        obligation.setCategory(category);
+        save(obligation);
     }
 
     @Override

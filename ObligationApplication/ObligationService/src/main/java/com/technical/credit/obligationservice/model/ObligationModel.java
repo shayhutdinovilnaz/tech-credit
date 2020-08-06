@@ -1,7 +1,6 @@
 package com.technical.credit.obligationservice.model;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,8 +10,10 @@ import java.util.Date;
  * Created on 29.03.2020
  */
 @Entity
-@Data
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
+@RequiredArgsConstructor
+@ToString
 public class ObligationModel extends ItemModel {
     @Column(nullable = false)
     private String name;

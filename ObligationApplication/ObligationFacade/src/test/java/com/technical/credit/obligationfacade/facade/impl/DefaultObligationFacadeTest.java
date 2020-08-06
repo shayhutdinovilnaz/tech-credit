@@ -6,6 +6,7 @@ import com.technical.credit.core.exception.ModelNotFoundException;
 import com.technical.credit.core.factory.GenericInstanceFactory;
 import com.technical.credit.obligationservice.model.ObligationModel;
 import com.technical.credit.obligationservice.model.UserModel;
+import com.technical.credit.obligationservice.service.CategoryService;
 import com.technical.credit.obligationservice.service.ObligationService;
 import com.technical.credit.obligationservice.service.RequestService;
 import com.technical.credit.obligationservice.service.SearchQuery;
@@ -34,6 +35,9 @@ public class DefaultObligationFacadeTest {
     ObligationService obligationService;
 
     @Mock
+    CategoryService categoryService;
+
+    @Mock
     RequestService requestService;
 
     @Mock
@@ -52,7 +56,7 @@ public class DefaultObligationFacadeTest {
         when(requestService.getCurrentUser()).thenReturn(currentUser);
         when(currentUser.getId()).thenReturn(userId);
 
-        final DefaultObligationFacade underTest = new DefaultObligationFacade(obligationConverter, obligationService, requestService, genericInstanceFactory);
+        final DefaultObligationFacade underTest = new DefaultObligationFacade(obligationConverter, obligationService, requestService, categoryService, genericInstanceFactory);
         Assert.assertNotNull(underTest.save(incomeObligationData));
         verify(obligationService).save(obligationModel);
         verifyNoMoreInteractions(obligationService);
@@ -67,7 +71,7 @@ public class DefaultObligationFacadeTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testSaveNullableObligation() {
-        new DefaultObligationFacade(obligationConverter, obligationService, requestService, genericInstanceFactory).save(null);
+        new DefaultObligationFacade(obligationConverter, obligationService, requestService,categoryService, genericInstanceFactory).save(null);
     }
 
     @Test(expected = ModelNotFoundException.class)
@@ -76,7 +80,7 @@ public class DefaultObligationFacadeTest {
 
         when(obligationConverter.reverseConvert(obligationData)).thenThrow(ModelNotFoundException.class);
 
-        new DefaultObligationFacade(obligationConverter, obligationService, requestService, genericInstanceFactory).save(obligationData);
+        new DefaultObligationFacade(obligationConverter, obligationService, requestService,categoryService, genericInstanceFactory).save(obligationData);
     }
 
     @Test
@@ -88,7 +92,7 @@ public class DefaultObligationFacadeTest {
         when(obligationService.getById(id)).thenReturn(obligationModel);
         when(obligationConverter.convert(obligationModel)).thenReturn(obligationData);
 
-        Assert.assertNotNull(new DefaultObligationFacade(obligationConverter, obligationService, requestService, genericInstanceFactory).search(id));
+        Assert.assertNotNull(new DefaultObligationFacade(obligationConverter, obligationService, requestService, categoryService, genericInstanceFactory).search(id));
         verify(obligationService).getById(id);
         verifyNoMoreInteractions(obligationService);
         verify(obligationConverter).convert(obligationModel);
@@ -104,7 +108,7 @@ public class DefaultObligationFacadeTest {
 
         when(obligationService.getById(id)).thenThrow(ModelNotFoundException.class);
 
-        new DefaultObligationFacade(obligationConverter, obligationService, requestService, genericInstanceFactory).search(id);
+        new DefaultObligationFacade(obligationConverter, obligationService, requestService,categoryService, genericInstanceFactory).search(id);
     }
 
     @Test
@@ -114,7 +118,7 @@ public class DefaultObligationFacadeTest {
 
         when(obligationService.getById(id)).thenReturn(obligation);
 
-        new DefaultObligationFacade(obligationConverter, obligationService, requestService, genericInstanceFactory).delete(id);
+        new DefaultObligationFacade(obligationConverter, obligationService, requestService,categoryService, genericInstanceFactory).delete(id);
         verify(obligationService).getById(id);
         verify(obligationService).delete(obligation);
         verifyNoMoreInteractions(obligationService);
@@ -129,7 +133,7 @@ public class DefaultObligationFacadeTest {
 
         when(obligationService.getById(id)).thenThrow(ModelNotFoundException.class);
 
-        new DefaultObligationFacade(obligationConverter, obligationService, requestService, genericInstanceFactory).delete(id);
+        new DefaultObligationFacade(obligationConverter, obligationService, requestService, categoryService, genericInstanceFactory).delete(id);
     }
 
     @Test
@@ -151,7 +155,7 @@ public class DefaultObligationFacadeTest {
         when(obligations.stream()).thenReturn(Stream.of(obligationModel));
         when(obligationConverter.convert(obligationModel)).thenReturn(obligationData);
 
-        final DefaultObligationFacade underTest = new DefaultObligationFacade(obligationConverter, obligationService, requestService, genericInstanceFactory);
+        final DefaultObligationFacade underTest = new DefaultObligationFacade(obligationConverter, obligationService, requestService,categoryService, genericInstanceFactory);
         final List<ObligationData> result = underTest.search(freeText, sortField, desc, page, limit);
         Assert.assertEquals(1, result.size());
         verify(searchQuery).setFreeText(freeText);

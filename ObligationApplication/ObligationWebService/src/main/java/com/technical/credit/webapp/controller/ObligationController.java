@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -32,7 +33,7 @@ public class ObligationController extends AbstractController {
             @ApiResponse(code = 410, message = "A some of the domain isn't found in the system"),
     })
     @PreAuthorize("hasAuthority('create_obligation')")
-    public ResponseEntity<ObligationData> save(@RequestBody final ObligationData obligation) {
+    public ResponseEntity<ObligationData> save(@Valid @RequestBody final ObligationData obligation) {
         return new ResponseEntity<>(obligationFacade.save(obligation), HttpStatus.CREATED);
     }
 
@@ -68,5 +69,16 @@ public class ObligationController extends AbstractController {
     public ResponseEntity<ObligationData> delete(@PathVariable long id) {
         obligationFacade.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping(value = "/add-to-category/{id}")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Instance of obligation is found in the system."),
+            @ApiResponse(code = 410, message = "A some of the domain isn't found in the system"),
+    })
+    @PreAuthorize("hasAuthority('read_obligation')")
+    public ResponseEntity<ObligationData> addToCategory(@PathVariable(name = "id") long obligationID, @RequestParam long categoryID) {
+        obligationFacade.assignToCategory(obligationID, categoryID);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

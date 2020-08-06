@@ -42,4 +42,13 @@ public interface ObligationFacade {
      * @param id - the id of delete obligation
      */
     void delete(long id);
+
+    /**
+     * Method add an obligation to the category.
+     *
+     * @param obligationID - id of obligation
+     * @param categoryID   id of category
+     * @throws com.technical.credit.core.exception.ModelNotFoundException - if category or obligation is not found by ID
+     */
+    void assignToCategory(long obligationID, long categoryID);
 }

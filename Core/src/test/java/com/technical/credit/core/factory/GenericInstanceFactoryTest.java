@@ -1,6 +1,5 @@
-package com.technical.credit.obligationservice.factory;
+package com.technical.credit.core.factory;
 
-import com.technical.credit.core.factory.GenericInstanceFactory;
 import org.junit.Test;
 
 import java.util.Date;

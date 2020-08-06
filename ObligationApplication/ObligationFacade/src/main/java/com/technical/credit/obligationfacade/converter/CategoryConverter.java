@@ -73,7 +73,6 @@ public class CategoryConverter implements Converter<CategoryData, CategoryModel>
         target.setObligations(convertObligations(source));
 
         return target;
-
     }
 
     private Set<ObligationModel> convertObligations(final CategoryData source) {
