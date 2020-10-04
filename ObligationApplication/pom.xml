@@ -29,7 +29,7 @@
         <springfox.swagger.version>2.6.1</springfox.swagger.version>
         <com.google.code.findbugs.version>3.0.0</com.google.code.findbugs.version>
         <org.apache.commons-lang3.version>3.0</org.apache.commons-lang3.version>
-        <org.apache.commons-collections4.version>4.0</org.apache.commons-collections4.version>
+        <org.apache.commons-collections4.version>4.1</org.apache.commons-collections4.version>
         <net.sf.ehcache.version>2.10.0</net.sf.ehcache.version>
         <spring-cloud.version>Hoxton.RC1</spring-cloud.version>
         <mysql.version>8.0.19</mysql.version>
